@@ -1,6 +1,6 @@
 ---
 type: Interview Ledger
-parent: homepage-ui-mockup.md
+parent: spec.md
 ---
 
 ## Records

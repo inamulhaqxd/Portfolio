@@ -1,0 +1,8 @@
+packages:
+  - "web"
+  - "admin"
+  - "packages/*"
+
+allowBuilds:
+  sharp: true
+  unrs-resolver: true

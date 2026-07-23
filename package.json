@@ -1,0 +1,16 @@
+{
+  "name": "portfolio",
+  "private": true,
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "lint": "turbo lint",
+    "test": "turbo test",
+    "test:run": "turbo test:run",
+    "test:e2e": "turbo test:e2e"
+  },
+  "devDependencies": {
+    "turbo": "^2"
+  },
+  "packageManager": "pnpm@9.15.4"
+}
