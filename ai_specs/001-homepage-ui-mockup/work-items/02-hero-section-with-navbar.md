@@ -19,16 +19,16 @@ Implement Hero section with name, title, intro, CTA buttons that scroll to secti
 - Color scheme: dark theme with indigo accent
 
 ## Acceptance criteria
-- [ ] Hero section displays name, title, and intro text
-- [ ] Hero section has special AI/ML related background pattern
-- [ ] Two CTA buttons with proper styling (primary solid, secondary outline)
-- [ ] Buttons scroll to respective sections
-- [ ] Navbar shows logo "Inam" and navigation links
-- [ ] Navbar is transparent over Hero section
-- [ ] Navbar becomes solid on scroll
-- [ ] Mobile hamburger menu works
-- [ ] Services link goes to placeholder route with "Coming Soon" message
-- [ ] Responsive typography and spacing for mobile, tablet, desktop
+- [x] Hero section displays name, title, and intro text
+- [x] Hero section has special AI/ML related background pattern
+- [x] Two CTA buttons with proper styling (primary solid, secondary outline)
+- [x] Buttons scroll to respective sections
+- [x] Navbar shows logo "Inam" and navigation links
+- [x] Navbar is transparent over Hero section
+- [x] Navbar becomes solid on scroll
+- [x] Mobile hamburger menu works
+- [x] Services link goes to placeholder route with "Coming Soon" message
+- [x] Responsive typography and spacing for mobile, tablet, desktop
 
 ## Covers
 - User Stories: 1, 6

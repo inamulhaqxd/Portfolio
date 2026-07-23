@@ -1,72 +1,35 @@
+import { SiteHeader } from "@/features/home/components/site-header";
+
 export default function Home() {
   return (
     <main className="relative overflow-hidden bg-background text-foreground">
+      <SiteHeader />
 
-      <section id="hero" className="relative z-10 mx-auto min-h-screen max-w-7xl px-5 pb-16 pt-5 sm:px-8 lg:px-12">
-        <nav aria-label="Primary navigation" className="flex items-center justify-between">
-          <a href="#hero" className="text-xl font-bold tracking-tight sm:text-2xl">
-            Inam<span className="text-accent">.</span>
+      <section id="hero" className="relative z-10 mx-auto flex min-h-screen max-w-7xl flex-col items-center justify-center px-5 pb-16 pt-32 text-center sm:px-8 sm:pt-40 lg:px-12">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 -z-10 opacity-[0.07]"
+          style={{
+            backgroundImage:
+              "radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)",
+            backgroundSize: "32px 32px",
+          }}
+        />
+
+        <p className="mb-5 text-sm font-bold uppercase tracking-[0.18em] text-accent">AI/ML Engineer</p>
+        <h1 className="max-w-4xl text-5xl font-bold leading-[0.95] tracking-[-0.06em] sm:text-6xl lg:text-7xl">
+          Inam ul Haq Tariq
+        </h1>
+        <p className="mx-auto mt-7 max-w-2xl text-base leading-relaxed text-foreground/70 sm:text-lg">
+          AI/ML engineer specializing in intelligent automation. I build systems that streamline workflows and boost productivity.
+        </p>
+        <div className="mt-9 flex flex-wrap justify-center gap-3">
+          <a href="#projects" className="rounded-full bg-accent px-6 py-3 text-sm font-bold text-ink transition hover:bg-accent-strong">
+            View Projects
           </a>
-          <div className="hidden items-center gap-7 text-sm text-foreground/70 md:flex">
-            <a href="#hero" className="transition hover:text-accent">Home</a>
-            <a href="#projects" className="transition hover:text-accent">Projects</a>
-            <a href="#skills" className="transition hover:text-accent">Skills</a>
-            <a href="#contact" className="transition hover:text-accent">Contact</a>
-          </div>
-          <a href="#contact" className="rounded-full bg-accent px-4 py-2 text-xs font-bold text-ink transition hover:bg-accent-strong sm:px-5">
-            Let&apos;s talk
+          <a href="#contact" className="rounded-full border border-line px-6 py-3 text-sm font-bold transition hover:border-accent hover:text-accent">
+            Contact Me
           </a>
-        </nav>
-
-        <div className="mx-auto flex max-w-4xl flex-col items-center pb-12 pt-24 text-center sm:pt-32 lg:pt-36">
-          <div className="max-w-3xl">
-            <p className="mb-5 text-sm font-bold uppercase tracking-[0.18em] text-accent">AI/ML Engineer</p>
-            <h1 className="text-5xl font-bold leading-[0.95] tracking-[-0.06em] sm:text-6xl lg:text-7xl">
-              Building AI that makes work feel <span className="text-accent">lighter.</span>
-            </h1>
-            <p className="mx-auto mt-7 max-w-2xl text-base leading-relaxed text-foreground/70 sm:text-lg">
-              I&apos;m Inam ul Haq Tariq. I design intelligent automation systems that remove repetitive work and help teams move with clarity.
-            </p>
-            <div className="mt-9 flex flex-wrap justify-center gap-3">
-              <a href="#projects" className="rounded-full bg-accent px-6 py-3 text-sm font-bold text-ink transition hover:bg-accent-strong">
-                View my work
-              </a>
-              <a href="#contact" className="rounded-full border border-line px-6 py-3 text-sm font-bold transition hover:border-accent hover:text-accent">
-                Start a conversation
-              </a>
-            </div>
-          </div>
-
-          <div className="relative mt-16 w-full max-w-3xl">
-            <div className="rounded-window border-[8px] border-foreground/35 bg-surface p-4 shadow-panel sm:border-[10px] sm:p-6">
-              <div className="mb-7 flex items-center gap-2" aria-hidden="true">
-                <span className="size-3 rounded-full bg-foreground/70" />
-                <span className="size-3 rounded-full bg-foreground/70" />
-                <span className="size-3 rounded-full bg-foreground/70" />
-              </div>
-              <div className="grid gap-4 sm:grid-cols-[1.15fr_0.85fr]">
-                <div className="rounded-panel border border-line bg-ink p-6 sm:p-8">
-                  <p className="text-xs font-bold uppercase tracking-[0.2em] text-accent">Portfolio OS</p>
-                  <p className="mt-10 text-3xl font-bold leading-none tracking-[-0.05em]">Systems built for people.</p>
-                  <div className="mt-10 flex items-end gap-2" aria-hidden="true">
-                    <span className="h-8 w-3 rounded-full bg-accent" />
-                    <span className="h-14 w-3 rounded-full bg-accent/70" />
-                    <span className="h-20 w-3 rounded-full bg-accent" />
-                    <span className="h-11 w-3 rounded-full bg-foreground/30" />
-                    <span className="h-16 w-3 rounded-full bg-foreground/50" />
-                  </div>
-                </div>
-                <div className="flex min-h-64 flex-col justify-between rounded-panel bg-accent p-6 text-ink sm:p-7">
-                  <div className="flex size-11 items-center justify-center rounded-full border border-ink/20 text-xl font-bold">AI</div>
-                  <div>
-                    <p className="text-5xl font-bold tracking-[-0.08em]">01</p>
-                    <p className="mt-2 text-sm font-semibold">Automation, intelligence, impact.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <p className="mx-auto mt-4 max-w-lg text-center text-xs font-bold uppercase tracking-[0.2em] text-foreground/45">Machine learning • workflow automation • applied AI</p>
-          </div>
         </div>
       </section>
 
