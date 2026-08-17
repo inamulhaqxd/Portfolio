@@ -110,6 +110,11 @@ pnpm test:e2e      # Playwright E2E tests
 - **Repo**: Same GitHub repo, different root directories
 - **Env vars**: Supabase keys + Resend API key
 
+## File Safety
+
+- Never delete, overwrite, or bulk-replace project files as cleanup without first listing the exact paths and getting explicit user approval.
+- Before structural changes, inspect `git status` and preserve unrelated worktree changes. If recovery is needed, restore only the confirmed paths from Git and verify them afterward.
+
 ## Updating These Rules
 
 These rules are updated by:
