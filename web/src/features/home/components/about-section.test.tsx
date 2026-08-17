@@ -16,7 +16,7 @@ describe("AboutSection", () => {
     render(<AboutSection />);
 
     expect(screen.getByText("Current role")).toBeInTheDocument();
-    expect(screen.getByText("AI/ML Engineer Trainee")).toBeInTheDocument();
+    expect(screen.getByText("AI/ML Engineer")).toBeInTheDocument();
     expect(screen.getByText("Organization")).toBeInTheDocument();
     expect(
       screen.getByText("National Telecommunication Corporation (NTC)")

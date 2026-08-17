@@ -45,10 +45,10 @@ export default function Home() {
           </div>
           <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {[
-              ["Python", "Automation and data workflows"],
-              ["PyTorch", "Applied machine learning"],
-              ["LangChain", "LLM applications"],
-              ["Next.js", "Fast product interfaces"],
+              ["Python", "ML workflows and automation"],
+              ["PyTorch", "Deep learning and computer vision"],
+              ["Scikit-learn", "Classical ML and model evaluation"],
+              ["NLP & LLMs", "Language models, RAG, and text processing"],
             ].map(([name, description], index) => (
               <article key={name} className="rounded-panel border border-line bg-background p-6 transition hover:-translate-y-1 hover:border-accent">
                 <span className="flex size-10 items-center justify-center rounded-full bg-accent text-sm font-bold text-ink">0{index + 1}</span>
@@ -90,10 +90,18 @@ export default function Home() {
             <h2 className="mt-5 text-4xl font-bold leading-none tracking-[-0.05em] sm:text-5xl">Learning by building useful things.</h2>
           </div>
           <div className="space-y-4">
-            {["AI/ML Engineer Trainee — NTC", "Computer Systems Engineering — AI specialization"].map((item, index) => (
-              <div key={item} className="flex gap-5 border-t border-line py-6">
-                <span className="text-sm font-bold text-accent">0{index + 1}</span>
-                <p className="text-lg font-bold">{item}</p>
+            {[
+              { role: "AI/ML Engineer", company: "National Telecommunication Corporation (NTC)", period: "Apr 2026 — Present", details: "AI chatbot solutions, RAG systems, vector databases, and local LLM development" },
+              { role: "BS Computer System Engineering", company: "Mirpur University of Science and Technology", period: "Sep 2021 — Aug 2025", details: "AI specialization" },
+            ].map((item, index) => (
+              <div key={item.role} className="border-t border-line py-6">
+                <div className="flex items-center gap-3">
+                  <span className="text-sm font-bold text-accent">0{index + 1}</span>
+                  <span className="text-xs text-foreground/40">{item.period}</span>
+                </div>
+                <p className="mt-2 text-lg font-bold">{item.role}</p>
+                <p className="text-sm text-foreground/60">{item.company}</p>
+                <p className="mt-1 text-sm text-foreground/50">{item.details}</p>
               </div>
             ))}
           </div>
@@ -106,7 +114,11 @@ export default function Home() {
             <p className="text-sm font-bold uppercase tracking-[0.18em]">Let&apos;s make something useful</p>
             <div className="mt-5 flex flex-col justify-between gap-8 md:flex-row md:items-end">
               <h2 className="max-w-2xl text-4xl font-bold leading-none tracking-[-0.06em] sm:text-6xl">Have an AI problem worth solving?</h2>
-              <a href="mailto:hello@example.com" className="rounded-full bg-ink px-6 py-3 text-sm font-bold text-foreground transition hover:bg-background">Get in touch</a>
+              <a href="mailto:inamulhaq12290@gmail.com" className="rounded-full bg-ink px-6 py-3 text-sm font-bold text-foreground transition hover:bg-background">Get in touch</a>
+            </div>
+            <div className="mt-8 flex gap-4">
+              <a href="https://github.com/inamulhaqxd" target="_blank" rel="noopener noreferrer" className="text-sm font-bold underline decoration-1 underline-offset-4 hover:text-ink/70">GitHub</a>
+              <a href="https://linkedin.com/in/inam-ul-haq-471969264" target="_blank" rel="noopener noreferrer" className="text-sm font-bold underline decoration-1 underline-offset-4 hover:text-ink/70">LinkedIn</a>
             </div>
           </div>
         </div>

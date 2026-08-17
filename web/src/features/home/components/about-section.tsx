@@ -1,5 +1,5 @@
 const FACTS = [
-  { label: "Current role", value: "AI/ML Engineer Trainee" },
+  { label: "Current role", value: "AI/ML Engineer" },
   { label: "Organization", value: "National Telecommunication Corporation (NTC)" },
   { label: "Education", value: "Computer Systems Engineering graduate" },
   { label: "University", value: "Mirpur University of Science and Technology" },
@@ -19,7 +19,7 @@ export function AboutSection() {
           <p className="mt-7 text-base leading-relaxed text-foreground/70 sm:text-lg">
             I am a Computer Systems Engineering graduate from Mirpur University
             of Science and Technology, currently working as an AI/ML Engineer
-            Trainee at National Telecommunication Corporation (NTC). My focus is
+            at National Telecommunication Corporation (NTC). My focus is
             on building practical AI systems — from intelligent automation and
             predictive models to computer vision and LLM/RAG integrations. I care
             about creating useful, reliable workflows that solve real problems.
