@@ -1,4 +1,5 @@
 import { SiteHeader } from "@/features/home/components/site-header";
+import { AboutSection } from "@/features/home/components/about-section";
 
 export default function Home() {
   return (
@@ -32,6 +33,8 @@ export default function Home() {
           </a>
         </div>
       </section>
+
+      <AboutSection />
 
       <section id="skills" className="relative z-10 bg-surface py-20 sm:py-28">
         <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
