@@ -46,9 +46,19 @@ export default function Home() {
           <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {[
               ["Python", "ML workflows and automation"],
-              ["PyTorch", "Deep learning and computer vision"],
+              ["SQL", "Database querying and management"],
               ["Scikit-learn", "Classical ML and model evaluation"],
-              ["NLP & LLMs", "Language models, RAG, and text processing"],
+              ["PyTorch", "Deep learning and computer vision"],
+              ["Pandas", "Data manipulation and analysis"],
+              ["NumPy", "Numerical computing and arrays"],
+              ["Matplotlib", "Data visualization and plotting"],
+              ["Seaborn", "Statistical data visualization"],
+              ["NLP", "Text processing and language models"],
+              ["Computer Vision", "Image analysis and object detection"],
+              ["LLMs", "Large language model integration"],
+              ["RAG", "Retrieval-augmented generation systems"],
+              ["PostgreSQL", "Relational database management"],
+              ["Docker", "Containerization and deployment"],
             ].map(([name, description], index) => (
               <article key={name} className="rounded-panel border border-line bg-background p-6 transition hover:-translate-y-1 hover:border-accent">
                 <span className="flex size-10 items-center justify-center rounded-full bg-accent text-sm font-bold text-ink">0{index + 1}</span>
