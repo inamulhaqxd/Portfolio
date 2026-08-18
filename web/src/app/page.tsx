@@ -45,6 +45,7 @@ export default function Home() {
           </div>
           <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {[
+              ["Python", "ML workflows and automation"],
               ["SQL", "Database querying and management"],
               ["NLP", "Text processing and language models"],
               ["Computer Vision", "Image analysis and object detection"],
