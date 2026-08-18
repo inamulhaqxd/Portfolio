@@ -45,14 +45,7 @@ export default function Home() {
           </div>
           <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {[
-              ["Python", "ML workflows and automation"],
               ["SQL", "Database querying and management"],
-              ["Scikit-learn", "Classical ML and model evaluation"],
-              ["PyTorch", "Deep learning and computer vision"],
-              ["Pandas", "Data manipulation and analysis"],
-              ["NumPy", "Numerical computing and arrays"],
-              ["Matplotlib", "Data visualization and plotting"],
-              ["Seaborn", "Statistical data visualization"],
               ["NLP", "Text processing and language models"],
               ["Computer Vision", "Image analysis and object detection"],
               ["LLMs", "Large language model integration"],
