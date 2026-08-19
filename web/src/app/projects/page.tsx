@@ -2,19 +2,21 @@ import Link from "next/link";
 import { SiteHeader } from "@/features/home/components/site-header";
 import { createClient } from "@supabase/supabase-js";
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-);
-
 export default async function ProjectsPage() {
-  const { data: projects } = await supabase
-    .from('projects')
-    .select('*')
-    .eq('status', 'published')
-    .order('created_at', { ascending: false });
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
-  const projectList = projects || [];
+  let projectList: { title: string; slug: string; description: string; tech: string[] }[] = [];
+
+  if (supabaseUrl && supabaseKey) {
+    const supabase = createClient(supabaseUrl, supabaseKey);
+    const { data: projects } = await supabase
+      .from('projects')
+      .select('*')
+      .eq('status', 'published')
+      .order('created_at', { ascending: false });
+    projectList = projects || [];
+  }
 
   return (
     <main className="min-h-screen bg-background text-foreground">

@@ -3,20 +3,22 @@ import { AboutSection } from "@/features/home/components/about-section";
 import { createClient } from "@supabase/supabase-js";
 import Link from "next/link";
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-);
-
 export default async function Home() {
-  const { data: projects } = await supabase
-    .from('projects')
-    .select('*')
-    .eq('status', 'published')
-    .order('created_at', { ascending: false })
-    .limit(6);
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
-  const displayProjects = projects || [];
+  let displayProjects: { title: string; slug: string; description: string; tech: string[] }[] = [];
+
+  if (supabaseUrl && supabaseKey) {
+    const supabase = createClient(supabaseUrl, supabaseKey);
+    const { data: projects } = await supabase
+      .from('projects')
+      .select('*')
+      .eq('status', 'published')
+      .order('created_at', { ascending: false })
+      .limit(6);
+    displayProjects = projects || [];
+  }
 
   return (
     <main className="relative overflow-hidden bg-background text-foreground">
