@@ -2,18 +2,21 @@
 
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const NAV_LINKS = [
-  { href: "#hero", label: "Home" },
-  { href: "#about", label: "About" },
-  { href: "#projects", label: "Projects" },
+  { href: "/#hero", label: "Home" },
+  { href: "/#about", label: "About" },
+  { href: "/#projects", label: "Projects" },
   { href: "/services", label: "Services" },
-  { href: "#contact", label: "Contact" },
+  { href: "/#contact", label: "Contact" },
 ];
 
 export function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const pathname = usePathname();
+  const isHome = pathname === "/";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 16);
@@ -23,6 +26,13 @@ export function SiteHeader() {
   }, []);
 
   const closeMobile = useCallback(() => setMobileOpen(false), []);
+
+  const getHref = (href: string) => {
+    if (isHome && href.startsWith("/#")) {
+      return href.slice(1);
+    }
+    return href;
+  };
 
   return (
     <header
@@ -35,7 +45,7 @@ export function SiteHeader() {
         aria-label="Primary navigation"
         className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8 lg:px-12"
       >
-        <a href="#hero" className="text-xl font-bold tracking-tight sm:text-2xl">
+        <a href={isHome ? "#hero" : "/#hero"} className="text-xl font-bold tracking-tight sm:text-2xl">
           Inam<span className="text-accent">.</span>
         </a>
 
@@ -43,7 +53,7 @@ export function SiteHeader() {
           {NAV_LINKS.map((link) => (
             <Link
               key={link.href}
-              href={link.href}
+              href={getHref(link.href)}
               className="transition hover:text-accent"
             >
               {link.label}
@@ -53,7 +63,7 @@ export function SiteHeader() {
 
         <div className="flex items-center gap-3">
           <a
-            href="#contact"
+            href={isHome ? "#contact" : "/#contact"}
             className="hidden rounded-full bg-accent px-4 py-2 text-xs font-bold text-ink transition hover:bg-accent-strong sm:px-5 md:inline-flex"
           >
             Let&apos;s talk
@@ -76,7 +86,7 @@ export function SiteHeader() {
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.href}
-                href={link.href}
+                href={getHref(link.href)}
                 onClick={closeMobile}
                 className="rounded-lg px-3 py-2 text-sm font-medium text-foreground/80 transition hover:bg-surface hover:text-accent"
               >
@@ -84,7 +94,7 @@ export function SiteHeader() {
               </Link>
             ))}
             <a
-              href="#contact"
+              href={isHome ? "#contact" : "/#contact"}
               onClick={closeMobile}
               className="mt-2 rounded-full bg-accent px-5 py-2.5 text-center text-sm font-bold text-ink transition hover:bg-accent-strong"
             >

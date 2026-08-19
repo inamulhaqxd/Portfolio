@@ -13,6 +13,7 @@ export interface Database {
           youtube_url: string | null
           images: string[]
           thumbnail_url: string
+          status: 'draft' | 'published'
           created_at: string
           updated_at: string
         }
@@ -27,6 +28,7 @@ export interface Database {
           youtube_url?: string | null
           images: string[]
           thumbnail_url: string
+          status?: 'draft' | 'published'
           created_at?: string
           updated_at?: string
         }
@@ -41,6 +43,7 @@ export interface Database {
           youtube_url?: string | null
           images?: string[]
           thumbnail_url?: string
+          status?: 'draft' | 'published'
           created_at?: string
           updated_at?: string
         }

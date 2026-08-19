@@ -1,5 +1,7 @@
-import { supabase } from '../shared/lib/supabase/server'
+import { createServerClient } from '../supabase/server'
 import type { Project } from '../types/project'
+
+const supabase = createServerClient()
 
 export async function getAllProjects(): Promise<Project[]> {
   const { data, error } = await supabase
@@ -63,4 +65,39 @@ export async function deleteProject(id: string): Promise<void> {
     .eq('id', id)
 
   if (error) throw error
+}
+
+export async function getPublishedProjects(): Promise<Project[]> {
+  const { data, error } = await supabase
+    .from('projects')
+    .select('*')
+    .eq('status', 'published')
+    .order('created_at', { ascending: false })
+
+  if (error) throw error
+  return data ?? []
+}
+
+export async function publishProject(id: string): Promise<Project> {
+  const { data, error } = await supabase
+    .from('projects')
+    .update({ status: 'published', updated_at: new Date().toISOString() })
+    .eq('id', id)
+    .select()
+    .single()
+
+  if (error) throw error
+  return data
+}
+
+export async function unpublishProject(id: string): Promise<Project> {
+  const { data, error } = await supabase
+    .from('projects')
+    .update({ status: 'draft', updated_at: new Date().toISOString() })
+    .eq('id', id)
+    .select()
+    .single()
+
+  if (error) throw error
+  return data
 }

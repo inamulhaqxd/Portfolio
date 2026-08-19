@@ -1,7 +1,23 @@
 import { SiteHeader } from "@/features/home/components/site-header";
 import { AboutSection } from "@/features/home/components/about-section";
+import { createClient } from "@supabase/supabase-js";
+import Link from "next/link";
 
-export default function Home() {
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+);
+
+export default async function Home() {
+  const { data: projects } = await supabase
+    .from('projects')
+    .select('*')
+    .eq('status', 'published')
+    .order('created_at', { ascending: false })
+    .limit(6);
+
+  const displayProjects = projects || [];
+
   return (
     <main className="relative overflow-hidden bg-background text-foreground">
       <SiteHeader />
@@ -36,35 +52,45 @@ export default function Home() {
 
       <AboutSection />
 
-      <section id="skills" className="relative z-10 bg-surface py-20 sm:py-28">
+      <section id="skills" className="relative z-10 bg-surface py-20 sm:py-28" style={{ animation: 'fadeInUp 0.6s ease-out forwards' }}>
         <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
           <p className="text-sm font-bold uppercase tracking-[0.18em] text-accent">What I work with</p>
           <div className="mt-5 flex flex-col justify-between gap-8 md:flex-row md:items-end">
             <h2 className="max-w-xl text-4xl font-bold leading-none tracking-[-0.05em] sm:text-5xl">Practical AI, from model to workflow.</h2>
             <p className="max-w-sm text-foreground/60">Tools and technologies selected to turn ideas into reliable, useful products.</p>
           </div>
-          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
             {[
-              ["Python", "ML workflows and automation"],
-              ["SQL", "Database querying and management"],
-              ["NLP", "Text processing and language models"],
-              ["Computer Vision", "Image analysis and object detection"],
-              ["LLMs", "Large language model integration"],
-              ["RAG", "Retrieval-augmented generation systems"],
-              ["PostgreSQL", "Relational database management"],
-              ["Docker", "Containerization and deployment"],
-            ].map(([name, description], index) => (
+              { name: "Python", slug: "python" },
+              { name: "SQL", slug: "postgresql" },
+              { name: "NLP", slug: "huggingface" },
+              { name: "Computer Vision", slug: "opencv" },
+              { name: "LLMs", slug: "ollama" },
+              { name: "RAG", slug: "elasticsearch" },
+              { name: "LangChain", slug: "langchain" },
+              { name: "Chroma DB", slug: "sqlite" },
+              { name: "FastAPI", slug: "fastapi" },
+              { name: "Git/GitHub", slug: "github" },
+              { name: "PostgreSQL", slug: "postgresql" },
+              { name: "Docker", slug: "docker" },
+              { name: "CI/CD Pipeline", slug: "githubactions" },
+              { name: "REST", slug: "postman" },
+              { name: "AI Agents", slug: "n8n" },
+            ].map(({ name, slug }) => (
               <article key={name} className="rounded-panel border border-line bg-background p-6 transition hover:-translate-y-1 hover:border-accent">
-                <span className="flex size-10 items-center justify-center rounded-full bg-accent text-sm font-bold text-ink">0{index + 1}</span>
-                <h3 className="mt-7 text-xl font-bold">{name}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-foreground/60">{description}</p>
+                <img
+                  src={`https://cdn.simpleicons.org/${slug}/ffd65a?viewbox=auto`}
+                  alt={name}
+                  className="mb-4 h-8 w-8"
+                />
+                <h3 className="text-xl font-bold">{name}</h3>
               </article>
             ))}
           </div>
         </div>
       </section>
 
-      <section id="projects" className="relative z-10 py-20 sm:py-28">
+      <section id="projects" className="relative z-10 py-20 sm:py-28" style={{ animation: 'fadeInUp 0.6s ease-out 0.1s forwards', opacity: 0 }}>
         <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
           <div className="rounded-window bg-ink p-7 shadow-panel sm:p-12">
             <p className="text-sm font-bold uppercase tracking-[0.18em] text-accent">Featured work</p>
@@ -73,46 +99,26 @@ export default function Home() {
               <a href="#contact" className="text-sm font-bold text-accent underline decoration-1 underline-offset-4 hover:text-accent-strong">Discuss a project</a>
             </div>
             <div className="mt-12 grid gap-4 md:grid-cols-3">
-              {["Intelligent document flow", "AI knowledge assistant", "Workflow insights"].map((project, index) => (
-                <article key={project} className="group rounded-panel bg-surface p-5 transition hover:-translate-y-1">
-                  <div className={`flex h-40 items-end rounded-2xl p-5 ${index === 1 ? "bg-accent text-ink" : "bg-surface-muted"}`}>
-                    <span className="text-5xl font-bold tracking-[-0.08em]">0{index + 1}</span>
-                  </div>
-                  <h3 className="mt-5 text-xl font-bold">{project}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-foreground/60">A focused case study is coming soon.</p>
-                </article>
+              {displayProjects.map((project, index) => (
+                <Link key={project.slug} href={`/projects/${project.slug}`}>
+                  <article className="group rounded-panel bg-surface p-5 transition hover:-translate-y-1">
+                    <div className={`flex h-40 items-end rounded-2xl p-5 ${index === 1 ? "bg-accent text-ink" : "bg-surface-muted"}`}>
+                      <span className="text-5xl font-bold tracking-[-0.08em]">0{index + 1}</span>
+                    </div>
+                    <h3 className="mt-5 text-xl font-bold">{project.title}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-foreground/60">{project.description.slice(0, 100)}...</p>
+                  </article>
+                </Link>
               ))}
+            </div>
+            <div className="mt-8 flex justify-center">
+              <a href="/projects" className="rounded-full border border-line px-6 py-3 text-sm font-bold transition hover:border-accent hover:text-accent">View all projects</a>
             </div>
           </div>
         </div>
       </section>
 
-      <section id="experience" className="relative z-10 bg-surface py-20 sm:py-28">
-        <div className="mx-auto grid max-w-7xl gap-10 px-5 sm:px-8 lg:grid-cols-[0.8fr_1.2fr] lg:px-12">
-          <div>
-            <p className="text-sm font-bold uppercase tracking-[0.18em] text-accent">Experience</p>
-            <h2 className="mt-5 text-4xl font-bold leading-none tracking-[-0.05em] sm:text-5xl">Learning by building useful things.</h2>
-          </div>
-          <div className="space-y-4">
-            {[
-              { role: "AI/ML Engineer", company: "National Telecommunication Corporation (NTC)", period: "Apr 2026 — Present", details: "AI chatbot solutions, RAG systems, vector databases, and local LLM development" },
-              { role: "BS Computer System Engineering", company: "Mirpur University of Science and Technology", period: "Sep 2021 — Aug 2025", details: "AI specialization" },
-            ].map((item, index) => (
-              <div key={item.role} className="border-t border-line py-6">
-                <div className="flex items-center gap-3">
-                  <span className="text-sm font-bold text-accent">0{index + 1}</span>
-                  <span className="text-xs text-foreground/40">{item.period}</span>
-                </div>
-                <p className="mt-2 text-lg font-bold">{item.role}</p>
-                <p className="text-sm text-foreground/60">{item.company}</p>
-                <p className="mt-1 text-sm text-foreground/50">{item.details}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="contact" className="relative z-10 py-20 sm:py-28">
+      <section id="contact" className="relative z-10 py-20 sm:py-28" style={{ animation: 'fadeInUp 0.6s ease-out 0.2s forwards', opacity: 0 }}>
         <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
           <div className="rounded-window bg-accent p-7 text-ink sm:p-12">
             <p className="text-sm font-bold uppercase tracking-[0.18em]">Let&apos;s make something useful</p>
@@ -123,6 +129,7 @@ export default function Home() {
             <div className="mt-8 flex gap-4">
               <a href="https://github.com/inamulhaqxd" target="_blank" rel="noopener noreferrer" className="text-sm font-bold underline decoration-1 underline-offset-4 hover:text-ink/70">GitHub</a>
               <a href="https://linkedin.com/in/inam-ul-haq-471969264" target="_blank" rel="noopener noreferrer" className="text-sm font-bold underline decoration-1 underline-offset-4 hover:text-ink/70">LinkedIn</a>
+              <a href="https://wa.me/923121869234" target="_blank" rel="noopener noreferrer" className="text-sm font-bold underline decoration-1 underline-offset-4 hover:text-ink/70">WhatsApp</a>
             </div>
           </div>
         </div>

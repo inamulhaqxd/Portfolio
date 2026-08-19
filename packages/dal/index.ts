@@ -5,6 +5,9 @@ export {
   createProject,
   updateProject,
   deleteProject,
+  getPublishedProjects,
+  publishProject,
+  unpublishProject,
 } from './projects'
 
 export {

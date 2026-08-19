@@ -12,23 +12,23 @@
     "test:e2e": "playwright test"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2",
     "next": "^16",
     "react": "^19",
-    "react-dom": "^19",
-    "@supabase/supabase-js": "^2"
+    "react-dom": "^19"
   },
   "devDependencies": {
+    "@playwright/test": "^1.52",
+    "@tailwindcss/postcss": "^4",
+    "@testing-library/jest-dom": "^6",
+    "@testing-library/react": "^16",
     "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "typescript": "^5",
-    "tailwindcss": "^4",
-    "@tailwindcss/postcss": "^4",
-    "vitest": "^3",
     "@vitejs/plugin-react": "^4",
     "jsdom": "^26",
-    "@testing-library/react": "^16",
-    "@testing-library/jest-dom": "^6",
-    "@playwright/test": "^1.52"
+    "tailwindcss": "^4",
+    "typescript": "^5",
+    "vitest": "^3"
   }
 }
