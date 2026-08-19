@@ -19,8 +19,7 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"],
-      "@portfolio/*": ["../packages/*"]
+      "@/*": ["./src/*"]
     }
   },
   "include": [
