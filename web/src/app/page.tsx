@@ -80,11 +80,13 @@ export default async function Home() {
               { name: "AI Agents", slug: "n8n" },
             ].map(({ name, slug }) => (
               <article key={name} className="rounded-panel border border-line bg-background p-6 transition hover:-translate-y-1 hover:border-accent">
-                <img
-                  src={`https://cdn.simpleicons.org/${slug}/ffd65a?viewbox=auto`}
-                  alt={name}
-                  className="mb-4 h-8 w-8"
-                />
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-accent">
+                  <img
+                    src={`https://cdn.simpleicons.org/${slug}/ffffff?viewbox=auto`}
+                    alt={name}
+                    className="h-6 w-6"
+                  />
+                </div>
                 <h3 className="text-xl font-bold">{name}</h3>
               </article>
             ))}
