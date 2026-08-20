@@ -68,15 +68,15 @@ export default async function Home() {
               { name: "REST", slug: "postman" },
               { name: "AI Agents", slug: "n8n" },
             ].map(({ name, slug }) => (
-              <article key={name} className="rounded-panel border border-line bg-background p-4 transition hover:-translate-y-1 hover:border-accent sm:p-6">
-                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-full bg-accent sm:mb-4 sm:h-12 sm:w-12">
+              <article key={name} className="group rounded-panel border border-line bg-background p-4 transition-all duration-300 hover:-translate-y-2 hover:border-accent hover:shadow-lg hover:shadow-accent/20 sm:p-6">
+                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-full bg-accent transition-all duration-300 group-hover:scale-110 group-hover:shadow-md sm:mb-4 sm:h-12 sm:w-12">
                   <img
                     src={`https://cdn.simpleicons.org/${slug}/ffffff?viewbox=auto`}
                     alt={name}
-                    className="h-5 w-5 sm:h-6 sm:w-6"
+                    className="h-5 w-5 transition-transform duration-300 group-hover:scale-110 sm:h-6 sm:w-6"
                   />
                 </div>
-                <h3 className="text-base font-bold sm:text-xl">{name}</h3>
+                <h3 className="text-base font-bold transition-colors duration-300 group-hover:text-accent sm:text-xl">{name}</h3>
               </article>
             ))}
           </div>
