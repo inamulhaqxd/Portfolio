@@ -1,6 +1,5 @@
 import { SiteHeader } from "@/features/home/components/site-header";
 import { AboutSection } from "@/features/home/components/about-section";
-import { NeuralNetwork } from "@/features/ai/components/neural-network";
 import Link from "next/link";
 
 const FEATURED_PROJECTS = [
@@ -15,7 +14,6 @@ export default async function Home() {
       <SiteHeader />
 
       <section id="hero" className="relative z-10 mx-auto flex min-h-[100dvh] max-w-7xl flex-col items-center justify-center px-4 pb-16 pt-28 text-center sm:px-6 sm:pt-32 md:px-8 lg:px-12">
-        <NeuralNetwork />
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 -z-10 opacity-[0.07]"

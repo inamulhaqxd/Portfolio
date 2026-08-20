@@ -51,7 +51,7 @@ export async function POST(request: Request) {
   try {
     const genAI = new GoogleGenerativeAI(apiKey);
     const model = genAI.getGenerativeModel({
-      model: "gemini-1.5-flash",
+      model: "gemini-3.6-flash",
       systemInstruction: buildSystemPrompt(
         typeof pageContext === "string" ? pageContext : undefined
       ),
