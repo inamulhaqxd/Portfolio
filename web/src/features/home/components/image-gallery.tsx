@@ -12,14 +12,25 @@ export function ImageGallery({ images, alt }: ImageGalleryProps) {
   const [current, setCurrent] = useState(0);
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   const prev = useCallback(() => {
-    setCurrent((c) => (c === 0 ? images.length - 1 : c - 1));
-  }, [images.length]);
+    if (isTransitioning) return;
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setCurrent((c) => (c === 0 ? images.length - 1 : c - 1));
+      setIsTransitioning(false);
+    }, 150);
+  }, [images.length, isTransitioning]);
 
   const next = useCallback(() => {
-    setCurrent((c) => (c === images.length - 1 ? 0 : c + 1));
-  }, [images.length]);
+    if (isTransitioning) return;
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setCurrent((c) => (c === images.length - 1 ? 0 : c + 1));
+      setIsTransitioning(false);
+    }, 150);
+  }, [images.length, isTransitioning]);
 
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
@@ -53,8 +64,11 @@ export function ImageGallery({ images, alt }: ImageGalleryProps) {
   return (
     <div className="relative overflow-hidden rounded-window">
       <div
-        className="flex transition-transform duration-300 ease-out"
-        style={{ transform: `translateX(-${current * 100}%)` }}
+        className="flex transition-all duration-500 ease-in-out"
+        style={{ 
+          transform: `translateX(-${current * 100}%)`,
+          opacity: isTransitioning ? 0.5 : 1
+        }}
         onTouchStart={onTouchStart}
         onTouchMove={onTouchMove}
         onTouchEnd={onTouchEnd}
@@ -77,7 +91,7 @@ export function ImageGallery({ images, alt }: ImageGalleryProps) {
             type="button"
             aria-label="Previous image"
             onClick={prev}
-            className="absolute left-3 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-ink/60 text-foreground backdrop-blur transition hover:bg-ink/80 sm:left-4 sm:h-10 sm:w-10"
+            className="absolute left-3 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-ink/60 text-foreground backdrop-blur-sm transition-all duration-300 hover:bg-ink/80 hover:scale-110 sm:left-4 sm:h-10 sm:w-10"
           >
             <ChevronLeft className="h-5 w-5" />
           </button>
@@ -85,7 +99,7 @@ export function ImageGallery({ images, alt }: ImageGalleryProps) {
             type="button"
             aria-label="Next image"
             onClick={next}
-            className="absolute right-3 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-ink/60 text-foreground backdrop-blur transition hover:bg-ink/80 sm:right-4 sm:h-10 sm:w-10"
+            className="absolute right-3 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-ink/60 text-foreground backdrop-blur-sm transition-all duration-300 hover:bg-ink/80 hover:scale-110 sm:right-4 sm:h-10 sm:w-10"
           >
             <ChevronRight className="h-5 w-5" />
           </button>
@@ -97,8 +111,8 @@ export function ImageGallery({ images, alt }: ImageGalleryProps) {
                 type="button"
                 aria-label={`Go to image ${i + 1}`}
                 onClick={() => setCurrent(i)}
-                className={`h-2 w-2 rounded-full transition-all sm:h-2.5 sm:w-2.5 ${
-                  i === current ? "bg-accent scale-110" : "bg-foreground/40"
+                className={`h-2 w-2 rounded-full transition-all duration-300 sm:h-2.5 sm:w-2.5 ${
+                  i === current ? "bg-accent scale-125" : "bg-foreground/40 hover:bg-foreground/60"
                 }`}
               />
             ))}

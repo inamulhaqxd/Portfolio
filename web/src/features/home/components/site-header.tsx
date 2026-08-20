@@ -48,35 +48,43 @@ export function SiteHeader() {
   return (
     <header
       data-scrolled={scrolled ? "true" : "false"}
-      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
-        scrolled ? "bg-background/95 backdrop-blur" : "bg-transparent"
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+        scrolled ? "bg-background/95 backdrop-blur-md shadow-sm" : "bg-transparent"
       }`}
     >
       <nav
         aria-label="Primary navigation"
         className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 sm:py-4 md:px-8 lg:px-12"
       >
-        <a href={isHome ? "#hero" : "/#hero"} className="text-lg font-bold tracking-tight sm:text-xl md:text-2xl">
+        <a href={isHome ? "#hero" : "/#hero"} className="text-lg font-bold tracking-tight transition-all duration-300 hover:text-accent sm:text-xl md:text-2xl">
           Inam<span className="text-accent">.</span>
         </a>
 
         <div className="hidden items-center gap-5 text-sm text-foreground/70 md:flex lg:gap-7">
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.href}
-              href={getHref(link.href)}
-              className="transition hover:text-accent"
-            >
-              {link.label}
-            </Link>
-          ))}
+          {NAV_LINKS.map((link) => {
+            const isActive = pathname === link.href || pathname === link.href.replace("/#", "/");
+            return (
+              <Link
+                key={link.href}
+                href={getHref(link.href)}
+                className={`relative transition-all duration-300 hover:text-accent ${
+                  isActive ? "text-accent" : ""
+                }`}
+              >
+                {link.label}
+                {isActive && (
+                  <span className="absolute -bottom-1 left-0 h-0.5 w-full bg-accent" />
+                )}
+              </Link>
+            );
+          })}
         </div>
 
         <div className="flex items-center gap-2 sm:gap-3">
           <ThemeToggle />
           <a
             href={isHome ? "#contact" : "/#contact"}
-            className="hidden rounded-full bg-accent px-4 py-2 text-xs font-bold text-ink transition hover:bg-accent-strong sm:px-5 md:inline-flex"
+            className="hidden rounded-full bg-accent px-4 py-2 text-xs font-bold text-ink transition-all duration-300 hover:bg-accent-strong hover:shadow-lg hover:shadow-accent/30 sm:px-5 md:inline-flex"
           >
             Let&apos;s talk
           </a>
@@ -84,7 +92,7 @@ export function SiteHeader() {
           <button
             type="button"
             aria-label={mobileOpen ? "Close navigation" : "Open navigation"}
-            className="flex size-8 items-center justify-center rounded-lg border border-line text-foreground transition hover:border-accent hover:text-accent sm:size-9 md:hidden"
+            className="flex size-8 items-center justify-center rounded-lg border border-line text-foreground transition-all duration-300 hover:border-accent hover:text-accent hover:shadow-md sm:size-9 md:hidden"
             onClick={() => setMobileOpen((prev) => !prev)}
           >
             {mobileOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
@@ -100,7 +108,7 @@ export function SiteHeader() {
                 key={link.href}
                 href={getHref(link.href)}
                 onClick={closeMobile}
-                className="rounded-lg px-3 py-2.5 text-sm font-medium text-foreground/80 transition hover:bg-surface hover:text-accent"
+                className="rounded-lg px-3 py-2.5 text-sm font-medium text-foreground/80 transition-all duration-300 hover:bg-surface hover:text-accent"
               >
                 {link.label}
               </Link>
@@ -108,7 +116,7 @@ export function SiteHeader() {
             <a
               href={isHome ? "#contact" : "/#contact"}
               onClick={closeMobile}
-              className="mt-2 rounded-full bg-accent px-5 py-2.5 text-center text-sm font-bold text-ink transition hover:bg-accent-strong"
+              className="mt-2 rounded-full bg-accent px-5 py-2.5 text-center text-sm font-bold text-ink transition-all duration-300 hover:bg-accent-strong hover:shadow-lg hover:shadow-accent/30"
             >
               Let&apos;s talk
             </a>

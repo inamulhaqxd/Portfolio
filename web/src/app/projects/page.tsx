@@ -19,19 +19,20 @@ export default async function ProjectsPage() {
     <main className="min-h-screen bg-background text-foreground">
       <SiteHeader />
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 md:px-8 md:py-28 lg:px-12">
-        <Link href="/" className="inline-flex items-center gap-2 text-sm font-bold text-accent underline decoration-1 underline-offset-4 hover:text-accent-strong">
-          <ArrowLeft className="h-4 w-4" />
+        <Link href="/" className="group inline-flex items-center gap-2 text-sm font-bold text-accent underline decoration-1 underline-offset-4 transition-all duration-300 hover:text-accent-strong hover:decoration-2">
+          <ArrowLeft className="h-4 w-4 transition-transform duration-300 group-hover:-translate-x-1" />
+          Back to home
         </Link>
         <h1 className="mt-6 text-3xl font-bold tracking-[-0.05em] sm:mt-8 sm:text-4xl md:text-5xl">All Case Studies</h1>
         <p className="mt-3 max-w-2xl text-sm text-foreground/60 sm:mt-4 sm:text-base">A collection of AI/ML projects I&apos;ve worked on.</p>
-        <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:mt-12 lg:grid-cols-3">
+        <div className="stagger mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:mt-12 lg:grid-cols-3">
           {PROJECTS.map((project) => (
             <Link key={project.slug} href={`/projects/${project.slug}`} className="flex">
-              <article className="group flex flex-col rounded-panel border border-line bg-surface p-4 transition hover:-translate-y-1 hover:border-accent sm:p-5 w-full">
+              <article className="group flex flex-col rounded-panel border border-line bg-surface p-4 transition-all duration-300 hover:-translate-y-2 hover:border-accent hover:shadow-lg hover:shadow-accent/10 sm:p-5 w-full">
                 <div className="h-36 overflow-hidden rounded-2xl sm:h-44">
-                  <img src={project.image} alt={project.title} className="h-full w-full object-cover transition group-hover:scale-105" />
+                  <img src={project.image} alt={project.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" />
                 </div>
-                <h3 className="mt-4 text-lg font-bold sm:mt-5 sm:text-xl">{project.title}</h3>
+                <h3 className="mt-4 text-lg font-bold transition-colors duration-300 group-hover:text-accent sm:mt-5 sm:text-xl">{project.title}</h3>
                 <p className="mt-2 text-xs leading-relaxed text-foreground/60 sm:text-sm">{project.description}</p>
               </article>
             </Link>

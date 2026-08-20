@@ -127,8 +127,9 @@ export default async function ProjectDetailPage({
       <main className="min-h-screen bg-background text-foreground">
         <SiteHeader />
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 md:px-8 md:py-28 lg:px-12">
-          <Link href="/projects" className="inline-flex items-center gap-2 text-sm font-bold text-accent underline decoration-1 underline-offset-4 hover:text-accent-strong">
-            <ArrowLeft className="h-4 w-4" />
+          <Link href="/projects" className="group inline-flex items-center gap-2 text-sm font-bold text-accent underline decoration-1 underline-offset-4 transition-all duration-300 hover:text-accent-strong hover:decoration-2">
+            <ArrowLeft className="h-4 w-4 transition-transform duration-300 group-hover:-translate-x-1" />
+            Back to projects
           </Link>
           <h1 className="mt-8 text-3xl font-bold sm:text-4xl">Case study not found</h1>
         </div>
@@ -140,16 +141,17 @@ export default async function ProjectDetailPage({
     <main className="min-h-screen bg-background text-foreground">
       <SiteHeader />
       <article className="mx-auto max-w-4xl px-4 py-16 sm:px-6 sm:py-20 md:px-8 md:py-28 lg:px-12">
-        <Link href="/projects" className="inline-flex items-center gap-2 text-sm font-bold text-accent underline decoration-1 underline-offset-4 hover:text-accent-strong">
-          <ArrowLeft className="h-4 w-4" />
+        <Link href="/projects" className="group inline-flex items-center gap-2 text-sm font-bold text-accent underline decoration-1 underline-offset-4 transition-all duration-300 hover:text-accent-strong hover:decoration-2">
+          <ArrowLeft className="h-4 w-4 transition-transform duration-300 group-hover:-translate-x-1" />
+          Back to projects
         </Link>
 
-        <header className="mt-8 sm:mt-10">
+        <header className="mt-8 animate-fade-in sm:mt-10">
           <ImageGallery images={project.images} alt={project.name} />
           <h1 className="mt-6 text-3xl font-bold tracking-[-0.05em] sm:mt-8 sm:text-4xl md:text-5xl">{project.name}</h1>
           <div className="mt-4 flex flex-wrap gap-2 sm:mt-6">
-            {project.tech.map((t) => (
-              <span key={t} className="rounded-full bg-surface px-3 py-1 text-xs font-bold text-foreground/70 sm:px-4 sm:py-1.5">{t}</span>
+            {project.tech.map((t, i) => (
+              <span key={t} className="rounded-full bg-surface px-3 py-1 text-xs font-bold text-foreground/70 transition-all duration-300 hover:bg-accent hover:text-ink sm:px-4 sm:py-1.5" style={{ animationDelay: `${i * 50}ms` }}>{t}</span>
             ))}
           </div>
         </header>
@@ -157,12 +159,12 @@ export default async function ProjectDetailPage({
         <div className="my-10 h-px bg-line sm:my-12" />
 
         <div className="space-y-10 sm:space-y-14">
-          <section>
+          <section className="animate-fade-in delay-200">
             <h2 className="text-xs font-bold uppercase tracking-[0.18em] text-accent sm:text-sm">About the project</h2>
             <p className="mt-3 text-sm leading-relaxed text-foreground/70 sm:mt-4 sm:text-base">{project.about}</p>
           </section>
 
-          <section>
+          <section className="animate-fade-in delay-300">
             <h2 className="text-xs font-bold uppercase tracking-[0.18em] text-accent sm:text-sm">How it was built</h2>
             <p className="mt-3 text-sm leading-relaxed text-foreground/70 sm:mt-4 sm:text-base">{project.built}</p>
           </section>
@@ -171,8 +173,11 @@ export default async function ProjectDetailPage({
         <div className="my-10 h-px bg-line sm:my-12" />
 
         <div className="flex flex-row flex-wrap gap-3 sm:gap-4">
-          <a href="#contact" className="rounded-full bg-accent px-5 py-2.5 text-xs font-bold text-ink transition hover:bg-accent-strong sm:px-6 sm:py-3 sm:text-sm">Discuss this project</a>
-          <Link href="/projects" className="rounded-full border border-line px-5 py-2.5 text-xs font-bold text-center transition hover:border-accent hover:text-accent sm:px-6 sm:py-3 sm:text-sm">View more case studies</Link>
+          <a href="#contact" className="group rounded-full bg-accent px-5 py-2.5 text-xs font-bold text-ink transition-all duration-300 hover:bg-accent-strong hover:shadow-lg hover:shadow-accent/30 sm:px-6 sm:py-3 sm:text-sm">
+            Discuss this project
+            <span className="ml-1 inline-block transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
+          </a>
+          <Link href="/projects" className="rounded-full border border-line px-5 py-2.5 text-xs font-bold text-center transition-all duration-300 hover:border-accent hover:text-accent hover:shadow-lg hover:shadow-accent/10 sm:px-6 sm:py-3 sm:text-sm">View more case studies</Link>
         </div>
       </article>
     </main>

@@ -24,20 +24,23 @@ export default async function Home() {
           }}
         />
 
-        <p className="mb-4 text-xs font-bold uppercase tracking-[0.18em] text-accent sm:text-sm">AI/ML Engineer</p>
-        <h1 className="max-w-4xl text-4xl font-bold leading-[0.95] tracking-[-0.06em] sm:text-5xl md:text-6xl lg:text-7xl">
-          Inam ul Haq Tariq
-        </h1>
-        <p className="mx-auto mt-6 max-w-2xl text-sm leading-relaxed text-foreground/70 sm:text-base md:text-lg">
-          AI/ML engineer specializing in intelligent automation. I build systems that streamline workflows and boost productivity.
-        </p>
-        <div className="mt-8 flex flex-wrap justify-center gap-3">
-          <a href="#projects" className="rounded-full bg-accent px-5 py-2.5 text-xs font-bold text-ink transition hover:bg-accent-strong sm:px-6 sm:py-3 sm:text-sm">
-            View Projects
-          </a>
-          <a href="#contact" className="rounded-full border border-line px-5 py-2.5 text-xs font-bold transition hover:border-accent hover:text-accent sm:px-6 sm:py-3 sm:text-sm">
-            Contact Me
-          </a>
+        <div className="stagger">
+          <p className="mb-4 text-xs font-bold uppercase tracking-[0.18em] text-accent sm:text-sm">AI/ML Engineer</p>
+          <h1 className="max-w-4xl text-4xl font-bold leading-[0.95] tracking-[-0.06em] sm:text-5xl md:text-6xl lg:text-7xl">
+            Inam ul Haq Tariq
+          </h1>
+          <p className="mx-auto mt-6 max-w-2xl text-sm leading-relaxed text-foreground/70 sm:text-base md:text-lg">
+            AI/ML engineer specializing in intelligent automation. I build systems that streamline workflows and boost productivity.
+          </p>
+          <div className="mt-8 flex flex-wrap justify-center gap-3">
+            <a href="#projects" className="group rounded-full bg-accent px-5 py-2.5 text-xs font-bold text-ink transition-all duration-300 hover:bg-accent-strong hover:shadow-lg hover:shadow-accent/30 sm:px-6 sm:py-3 sm:text-sm">
+              View Projects
+              <span className="ml-1 inline-block transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
+            </a>
+            <a href="#contact" className="rounded-full border border-line px-5 py-2.5 text-xs font-bold transition-all duration-300 hover:border-accent hover:text-accent hover:shadow-lg hover:shadow-accent/10 sm:px-6 sm:py-3 sm:text-sm">
+              Contact Me
+            </a>
+          </div>
         </div>
       </section>
 
@@ -50,7 +53,7 @@ export default async function Home() {
             <h2 className="max-w-xl text-3xl font-bold leading-none tracking-[-0.05em] sm:text-4xl md:text-5xl">Practical AI, from model to workflow.</h2>
             <p className="max-w-sm text-sm text-foreground/60">Tools and technologies selected to turn ideas into reliable, useful products.</p>
           </div>
-          <div className="mt-10 grid grid-cols-3 gap-3 sm:gap-4 md:grid-cols-4 lg:grid-cols-5">
+          <div className="stagger mt-10 grid grid-cols-3 gap-3 sm:gap-4 md:grid-cols-4 lg:grid-cols-5">
             {[
               { name: "Python", slug: "python" },
               { name: "SQL", slug: "postgresql" },
@@ -91,14 +94,14 @@ export default async function Home() {
               <h2 className="max-w-xl text-3xl font-bold leading-none tracking-[-0.05em] sm:text-4xl md:text-5xl">Projects that turn complex problems into clear outcomes.</h2>
               <a href="#contact" className="text-xs font-bold text-accent underline decoration-1 underline-offset-4 hover:text-accent-strong sm:text-sm">Discuss a project</a>
             </div>
-            <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+            <div className="stagger mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
               {FEATURED_PROJECTS.map((project) => (
                 <Link key={project.slug} href={`/projects/${project.slug}`} className="flex">
-                  <article className="group flex flex-col rounded-panel bg-surface p-4 transition hover:-translate-y-1 sm:p-5 w-full">
+                  <article className="group flex flex-col rounded-panel bg-surface p-4 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg hover:shadow-accent/10 sm:p-5 w-full">
                     <div className="h-36 overflow-hidden rounded-2xl sm:h-44">
-                      <img src={project.image} alt={project.title} className="h-full w-full object-cover transition group-hover:scale-105" />
+                      <img src={project.image} alt={project.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" />
                     </div>
-                    <h3 className="mt-4 text-lg font-bold sm:mt-5 sm:text-xl">{project.title}</h3>
+                    <h3 className="mt-4 text-lg font-bold transition-colors duration-300 group-hover:text-accent sm:mt-5 sm:text-xl">{project.title}</h3>
                     <p className="mt-2 text-xs leading-relaxed text-foreground/60 sm:text-sm">{project.description}</p>
                   </article>
                 </Link>
@@ -117,12 +120,15 @@ export default async function Home() {
             <p className="text-xs font-bold uppercase tracking-[0.18em] sm:text-sm">Let&apos;s make something useful</p>
             <div className="mt-5 flex flex-col justify-between gap-6 md:flex-row md:items-end md:gap-8">
               <h2 className="max-w-2xl text-3xl font-bold leading-none tracking-[-0.06em] sm:text-4xl md:text-6xl">Have an AI problem worth solving?</h2>
-              <a href="mailto:inamulhaq12290@gmail.com" className="rounded-full bg-ink px-5 py-2.5 text-xs font-bold text-foreground transition hover:bg-background sm:px-6 sm:py-3 sm:text-sm">Get in touch</a>
+              <a href="mailto:inamulhaq12290@gmail.com" className="group rounded-full bg-ink px-5 py-2.5 text-xs font-bold text-foreground transition-all duration-300 hover:bg-background hover:shadow-lg sm:px-6 sm:py-3 sm:text-sm">
+                Get in touch
+                <span className="ml-1 inline-block transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
+              </a>
             </div>
             <div className="mt-8 flex flex-wrap gap-4">
-              <a href="https://github.com/inamulhaqxd" target="_blank" rel="noopener noreferrer" className="text-xs font-bold underline decoration-1 underline-offset-4 hover:text-ink/70 sm:text-sm">GitHub</a>
-              <a href="https://linkedin.com/in/inam-ul-haq-471969264" target="_blank" rel="noopener noreferrer" className="text-xs font-bold underline decoration-1 underline-offset-4 hover:text-ink/70 sm:text-sm">LinkedIn</a>
-              <a href="https://wa.me/923121869234" target="_blank" rel="noopener noreferrer" className="text-xs font-bold underline decoration-1 underline-offset-4 hover:text-ink/70 sm:text-sm">WhatsApp</a>
+              <a href="https://github.com/inamulhaqxd" target="_blank" rel="noopener noreferrer" className="text-xs font-bold underline decoration-1 underline-offset-4 transition-all duration-300 hover:text-ink/70 hover:decoration-2 sm:text-sm">GitHub</a>
+              <a href="https://linkedin.com/in/inam-ul-haq-471969264" target="_blank" rel="noopener noreferrer" className="text-xs font-bold underline decoration-1 underline-offset-4 transition-all duration-300 hover:text-ink/70 hover:decoration-2 sm:text-sm">LinkedIn</a>
+              <a href="https://wa.me/923121869234" target="_blank" rel="noopener noreferrer" className="text-xs font-bold underline decoration-1 underline-offset-4 transition-all duration-300 hover:text-ink/70 hover:decoration-2 sm:text-sm">WhatsApp</a>
             </div>
           </div>
         </div>
