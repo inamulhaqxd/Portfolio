@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Space_Grotesk } from "next/font/google";
-import { ChatWidget } from "@/features/ai/components/chat-widget";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -22,7 +21,6 @@ export default function RootLayout({
     <html lang="en" className={`${spaceGrotesk.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
         {children}
-        <ChatWidget />
       </body>
     </html>
   );
