@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { SiteHeader } from "@/features/home/components/site-header";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Home } from "lucide-react";
 import { ImageGallery } from "@/features/home/components/image-gallery";
 
 const PROJECTS = [
@@ -127,10 +127,14 @@ export default async function ProjectDetailPage({
       <main className="min-h-screen bg-background text-foreground">
         <SiteHeader />
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 md:px-8 md:py-28 lg:px-12">
-          <Link href="/projects" className="group inline-flex items-center gap-2 text-sm font-bold text-accent underline decoration-1 underline-offset-4 transition-all duration-300 hover:text-accent-strong hover:decoration-2">
-            <ArrowLeft className="h-4 w-4 transition-transform duration-300 group-hover:-translate-x-1" />
-            Back to projects
-          </Link>
+          <div className="flex items-center gap-3">
+            <Link href="/projects" className="group inline-flex items-center justify-center rounded-full border border-line p-2 transition-all duration-300 hover:border-accent hover:text-accent" aria-label="Back to projects">
+              <ArrowLeft className="h-4 w-4 transition-transform duration-300 group-hover:-translate-x-1" />
+            </Link>
+            <Link href="/" className="group inline-flex items-center justify-center rounded-full border border-line p-2 transition-all duration-300 hover:border-accent hover:text-accent" aria-label="Back to home">
+              <Home className="h-4 w-4" />
+            </Link>
+          </div>
           <h1 className="mt-8 text-3xl font-bold sm:text-4xl">Case study not found</h1>
         </div>
       </main>
@@ -141,10 +145,14 @@ export default async function ProjectDetailPage({
     <main className="min-h-screen bg-background text-foreground">
       <SiteHeader />
       <article className="mx-auto max-w-4xl px-4 py-16 sm:px-6 sm:py-20 md:px-8 md:py-28 lg:px-12">
-        <Link href="/projects" className="group inline-flex items-center gap-2 text-sm font-bold text-accent underline decoration-1 underline-offset-4 transition-all duration-300 hover:text-accent-strong hover:decoration-2">
-          <ArrowLeft className="h-4 w-4 transition-transform duration-300 group-hover:-translate-x-1" />
-          Back to projects
-        </Link>
+        <div className="flex items-center gap-3">
+          <Link href="/projects" className="group inline-flex items-center justify-center rounded-full border border-line p-2 transition-all duration-300 hover:border-accent hover:text-accent" aria-label="Back to projects">
+            <ArrowLeft className="h-4 w-4 transition-transform duration-300 group-hover:-translate-x-1" />
+          </Link>
+          <Link href="/" className="group inline-flex items-center justify-center rounded-full border border-line p-2 transition-all duration-300 hover:border-accent hover:text-accent" aria-label="Back to home">
+            <Home className="h-4 w-4" />
+          </Link>
+        </div>
 
         <header className="mt-8 animate-fade-in sm:mt-10">
           <ImageGallery images={project.images} alt={project.name} />
@@ -177,7 +185,10 @@ export default async function ProjectDetailPage({
             Discuss this project
             <span className="ml-1 inline-block transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
           </a>
-          <Link href="/projects" className="rounded-full border border-line px-5 py-2.5 text-xs font-bold text-center transition-all duration-300 hover:border-accent hover:text-accent hover:shadow-lg hover:shadow-accent/10 sm:px-6 sm:py-3 sm:text-sm">View more case studies</Link>
+          <Link href="/projects" className="group inline-flex items-center gap-2 rounded-full border border-line px-5 py-2.5 text-xs font-bold text-center transition-all duration-300 hover:border-accent hover:text-accent hover:shadow-lg hover:shadow-accent/10 sm:px-6 sm:py-3 sm:text-sm">
+            <ArrowLeft className="h-3.5 w-3.5 transition-transform duration-300 group-hover:-translate-x-1" />
+            View more case studies
+          </Link>
         </div>
       </article>
     </main>
