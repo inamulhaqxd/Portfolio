@@ -100,12 +100,15 @@ export function ChatWidget() {
       setIsLoading(true);
 
       try {
+        // Only send messages from the first user message onward
         const allMessages = [...messages, userMsg];
+        const firstUserIdx = allMessages.findIndex((m) => m.role === "user");
+        const apiMessages = firstUserIdx >= 0 ? allMessages.slice(firstUserIdx) : [userMsg];
         const res = await fetch("/api/chat", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            messages: formatChatMessages(allMessages),
+            messages: formatChatMessages(apiMessages),
           }),
         });
 
