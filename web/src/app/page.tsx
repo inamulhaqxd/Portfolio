@@ -6,9 +6,6 @@ const FEATURED_PROJECTS = [
   { title: "Intelligent document flow", slug: "intelligent-document-flow", description: "A document processing system that pulls structured data out of scanned PDFs, invoices, and forms.", image: "https://picsum.photos/seed/docflow/600/400" },
   { title: "AI knowledge assistant", slug: "ai-knowledge-assistant", description: "An internal chatbot that answers questions from company docs using semantic retrieval.", image: "https://picsum.photos/seed/knowledge/600/400" },
   { title: "Workflow insights", slug: "workflow-insights", description: "A dashboard that visualizes how business processes actually run and where bottlenecks form.", image: "https://picsum.photos/seed/workflow/600/400" },
-  { title: "Sentiment analyzer", slug: "sentiment-analyzer", description: "Real-time sentiment analysis that classifies customer feedback into positive, negative, or neutral.", image: "https://picsum.photos/seed/sentiment/600/400" },
-  { title: "Image classifier", slug: "image-classifier", description: "Detects and categorizes retail products from shelf camera feeds using computer vision.", image: "https://picsum.photos/seed/classifier/600/400" },
-  { title: "Predictive maintenance", slug: "predictive-maintenance", description: "Predicts when industrial equipment is likely to fail before breakdowns happen.", image: "https://picsum.photos/seed/maintenance/600/400" },
 ];
 
 export default async function Home() {

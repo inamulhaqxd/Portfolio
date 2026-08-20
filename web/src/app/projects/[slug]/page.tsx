@@ -1,12 +1,17 @@
 import Link from "next/link";
 import { SiteHeader } from "@/features/home/components/site-header";
 import { ArrowLeft } from "lucide-react";
+import { ImageGallery } from "@/features/home/components/image-gallery";
 
 const PROJECTS = [
   {
     name: "Intelligent document flow",
     slug: "intelligent-document-flow",
-    image: "https://picsum.photos/seed/docflow/800/450",
+    images: [
+      "https://picsum.photos/seed/docflow1/800/450",
+      "https://picsum.photos/seed/docflow2/800/450",
+      "https://picsum.photos/seed/docflow3/800/450",
+    ],
     about: "A document processing system that pulls structured data out of scanned PDFs, invoices, and forms. It combines OCR with named-entity recognition to extract fields like dates, amounts, and vendor names — then pushes them into a structured JSON output. Built for a team that was manually re-keying data from hundreds of documents per week.",
     built: "Tesseract handles the OCR layer, spaCy does entity extraction on top. FastAPI wraps both into a single endpoint. Documents are preprocessed with OpenCV for deskewing and noise reduction before OCR. Output is normalized into a consistent JSON schema regardless of input format. Deployed as a Docker container behind a simple upload UI.",
     tech: ["Python", "Tesseract OCR", "spaCy", "FastAPI"],
@@ -14,7 +19,11 @@ const PROJECTS = [
   {
     name: "AI knowledge assistant",
     slug: "ai-knowledge-assistant",
-    image: "https://picsum.photos/seed/knowledge/800/450",
+    images: [
+      "https://picsum.photos/seed/knowledge1/800/450",
+      "https://picsum.photos/seed/knowledge2/800/450",
+      "https://picsum.photos/seed/knowledge3/800/450",
+    ],
     about: "An internal chatbot that answers questions from company docs — wikis, SOPs, product specs. Instead of keyword search, it uses semantic retrieval so employees can ask in plain language and get accurate answers with source links.",
     built: "Documents are chunked and embedded with OpenAI embeddings, stored in ChromaDB. At query time, LangChain retrieves the top-k relevant chunks and passes them as context to GPT-4. Conversation history is maintained in Redis for multi-turn support. Frontend is a minimal React chat widget that can be embedded in any internal tool.",
     tech: ["LangChain", "OpenAI", "ChromaDB", "React"],
@@ -22,7 +31,11 @@ const PROJECTS = [
   {
     name: "Workflow insights",
     slug: "workflow-insights",
-    image: "https://picsum.photos/seed/workflow/800/450",
+    images: [
+      "https://picsum.photos/seed/workflow1/800/450",
+      "https://picsum.photos/seed/workflow2/800/450",
+      "https://picsum.photos/seed/workflow3/800/450",
+    ],
     about: "A dashboard that visualizes how business processes actually run — where tasks pile up, which steps take longest, and where bottlenecks form. Uses historical process data to predict future delays before they happen.",
     built: "Data pipelines pull event logs from internal systems into a Postgres warehouse. Pandas handles transformation and feature engineering. Scikit-learn models predict cycle times and flag anomalies. Next.js frontend renders interactive charts with date range filters and drill-down views. Deployed on Vercel with server-side data fetching.",
     tech: ["Python", "Pandas", "Scikit-learn", "Next.js"],
@@ -30,7 +43,11 @@ const PROJECTS = [
   {
     name: "Sentiment analyzer",
     slug: "sentiment-analyzer",
-    image: "https://picsum.photos/seed/sentiment/800/450",
+    images: [
+      "https://picsum.photos/seed/sentiment1/800/450",
+      "https://picsum.photos/seed/sentiment2/800/450",
+      "https://picsum.photos/seed/sentiment3/800/450",
+    ],
     about: "Processes customer reviews and social media comments in real-time, classifying each as positive, negative, or neutral. Used by a support team that was drowning in unstructured feedback with no way to prioritize angry customers.",
     built: "A fine-tuned DistilBERT model handles classification, served through a FastAPI endpoint. Ingestion pipeline reads from a message queue, classifies in batch, and writes results to PostgreSQL. A simple admin dashboard shows sentiment trends over time. Achieved 92% accuracy on the test set after fine-tuning on domain-specific labeled data.",
     tech: ["Python", "Transformers", "FastAPI", "PostgreSQL"],
@@ -38,7 +55,11 @@ const PROJECTS = [
   {
     name: "Image classifier",
     slug: "image-classifier",
-    image: "https://picsum.photos/seed/classifier/800/450",
+    images: [
+      "https://picsum.photos/seed/classifier1/800/450",
+      "https://picsum.photos/seed/classifier2/800/450",
+      "https://picsum.photos/seed/classifier3/800/450",
+    ],
     about: "Detects and categorizes retail products from shelf camera feeds. The store was doing manual inventory counts — this automates it with computer vision, flagging out-of-stock items in real-time.",
     built: "Transfer learning on MobileNetV2, fine-tuned on 10k+ labeled product images. OpenCV handles frame extraction from camera streams. Model runs inference per frame and aggregates counts over configurable time windows. Deployed with Docker on edge devices near the cameras for low-latency processing. REST API serves predictions to the store's inventory dashboard.",
     tech: ["Python", "TensorFlow", "OpenCV", "Docker"],
@@ -46,7 +67,11 @@ const PROJECTS = [
   {
     name: "Predictive maintenance",
     slug: "predictive-maintenance",
-    image: "https://picsum.photos/seed/maintenance/800/450",
+    images: [
+      "https://picsum.photos/seed/maintenance1/800/450",
+      "https://picsum.photos/seed/maintenance2/800/450",
+      "https://picsum.photos/seed/maintenance3/800/450",
+    ],
     about: "Predicts when industrial equipment is likely to fail, so maintenance can be scheduled before breakdowns happen. The plant was losing thousands per hour on unplanned downtime with no early warning system.",
     built: "Sensor data (temperature, vibration, pressure) is ingested via Kafka into S3. Airflow orchestrates daily feature engineering and model retraining. XGBoost model trained on historical failure patterns, with features engineered from time-window aggregations. Predictions pushed to an alerting system that notifies maintenance teams 48-72 hours before likely failure.",
     tech: ["Python", "XGBoost", "Airflow", "AWS"],
@@ -54,7 +79,11 @@ const PROJECTS = [
   {
     name: "Chatbot framework",
     slug: "chatbot-framework",
-    image: "https://picsum.photos/seed/chatbot/800/450",
+    images: [
+      "https://picsum.photos/seed/chatbot1/800/450",
+      "https://picsum.photos/seed/chatbot2/800/450",
+      "https://picsum.photos/seed/chatbot3/800/450",
+    ],
     about: "A reusable base for building domain-specific chatbots without starting from scratch every time. Handles the hard parts — intent recognition, context management, conversation flow — so new bots can be spun up in days instead of weeks.",
     built: "Rasa handles NLU (intent classification + entity extraction). FastAPI serves as the conversation engine with a plugin architecture for custom actions. Redis stores conversation state with TTL-based cleanup. Designed to be multi-tenant — each deployment gets its own NLU model and action server, but shares the core framework. Includes a CLI for scaffolding new bot projects.",
     tech: ["Python", "Rasa", "FastAPI", "Redis"],
@@ -62,7 +91,11 @@ const PROJECTS = [
   {
     name: "Data pipeline",
     slug: "data-pipeline",
-    image: "https://picsum.photos/seed/datapipe/800/450",
+    images: [
+      "https://picsum.photos/seed/datapipe1/800/450",
+      "https://picsum.photos/seed/datapipe2/800/450",
+      "https://picsum.photos/seed/datapipe3/800/450",
+    ],
     about: "An ETL system that takes raw, messy data from multiple sources and turns it into clean, versioned datasets ready for model training. The data science team was spending 60% of their time on data prep — this automates the whole thing.",
     built: "Apache Spark handles distributed processing for large datasets. Airflow orchestrates the pipeline DAG — extract, validate, transform, feature-engineer, version. Data quality checks run at each stage with configurable thresholds. Output lands in S3 with Delta Lake for versioning and time-travel queries. Schema registry ensures compatibility between pipeline runs.",
     tech: ["Python", "Apache Spark", "Airflow", "S3"],
@@ -70,7 +103,11 @@ const PROJECTS = [
   {
     name: "Recommendation engine",
     slug: "recommendation-engine",
-    image: "https://picsum.photos/seed/recommend/800/450",
+    images: [
+      "https://picsum.photos/seed/recommend1/800/450",
+      "https://picsum.photos/seed/recommend2/800/450",
+      "https://picsum.photos/seed/recommend3/800/450",
+    ],
     about: "Suggests content to users based on what they've interacted with before and what similar users liked. Replaced a generic 'popular items' feed that wasn't driving engagement.",
     built: "Hybrid approach: collaborative filtering (user-item matrix factorization via Surprise) combined with content-based similarity (TF-IDF on item metadata). FastAPI serves recommendations with Redis caching for sub-100ms response times. Includes an A/B testing framework to compare model variants. Retrains nightly on new interaction data via an Airflow DAG.",
     tech: ["Python", "Surprise", "FastAPI", "Redis"],
@@ -108,9 +145,7 @@ export default async function ProjectDetailPage({
         </Link>
 
         <header className="mt-8 sm:mt-10">
-          <div className="overflow-hidden rounded-window">
-            <img src={project.image} alt={project.name} className="h-auto w-full object-cover" />
-          </div>
+          <ImageGallery images={project.images} alt={project.name} />
           <h1 className="mt-6 text-3xl font-bold tracking-[-0.05em] sm:mt-8 sm:text-4xl md:text-5xl">{project.name}</h1>
           <div className="mt-4 flex flex-wrap gap-2 sm:mt-6">
             {project.tech.map((t) => (
@@ -135,7 +170,7 @@ export default async function ProjectDetailPage({
 
         <div className="my-10 h-px bg-line sm:my-12" />
 
-        <div className="flex flex-col gap-3 sm:flex-row sm:gap-4">
+        <div className="flex flex-row flex-wrap gap-3 sm:gap-4">
           <a href="#contact" className="rounded-full bg-accent px-5 py-2.5 text-xs font-bold text-ink transition hover:bg-accent-strong sm:px-6 sm:py-3 sm:text-sm">Discuss this project</a>
           <Link href="/projects" className="rounded-full border border-line px-5 py-2.5 text-xs font-bold text-center transition hover:border-accent hover:text-accent sm:px-6 sm:py-3 sm:text-sm">View more case studies</Link>
         </div>
