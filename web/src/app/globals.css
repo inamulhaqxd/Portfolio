@@ -11,6 +11,17 @@
   --line: rgba(246, 243, 237, 0.16);
 }
 
+.light {
+  --background: #fafaf9;
+  --foreground: #1a1a1a;
+  --accent: #d4a017;
+  --accent-strong: #b8941a;
+  --surface: #f0f0f0;
+  --surface-muted: #e4e4e4;
+  --ink: #ffffff;
+  --line: rgba(26, 26, 26, 0.16);
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);

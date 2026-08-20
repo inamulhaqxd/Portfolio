@@ -28,10 +28,17 @@ A public project display feature covering:
 ### Public Project Display
 
 1. Homepage: fetch published projects, display as cards in "Featured work" section (newest first). Order by `created_at` descending — editing does not change position. [L8]
-2. `/projects` page: list all published projects as cards (newest first). [L8, L10]
+2. `/projects` page: list all published projects as cards (newest first). Page heading: "All Case Studies". Back link to home uses Lucide `ArrowLeft` icon (no text). [L8, L10, L12]
 3. Project card shows: thumbnail image, title, brief description (first ~100 chars of description). [L10]
-4. `/projects/[slug]` detail page: full project info — title, image, full markdown description, tech tags, links, embedded YouTube video. [L11]
+4. `/projects/[slug]` detail page: case study layout with structured sections. Back link to `/projects` uses Lucide `ArrowLeft` icon (no text). [L11, L12]
 5. YouTube embed via iframe when `youtube_url` is provided. Accept `youtube.com/watch?v=`, `youtu.be/`, and `youtube.com/embed/` formats. Extract video ID for embedding. [L11]
+
+### Case Study Format (Detail Page)
+
+6. Detail page sections: "About the project" and "How it was built". [L12]
+7. Each section has a heading + paragraph (3-5 sentences, specific and concrete). [L12]
+8. Tech Stack section displays tags as pills (existing badge style). [L12]
+9. Mock projects include dummy case study content for all 9 projects. [L12]
 
 ### Loading / Error / Empty States
 

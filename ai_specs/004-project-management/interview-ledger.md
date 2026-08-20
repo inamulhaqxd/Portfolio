@@ -102,3 +102,29 @@ Recommended Answer: Newest first (by `created_at` descending).
 Answer: recommended
 
 Decision: Order projects by `created_at` descending (newest first).
+
+### L9
+
+Status: current
+
+Question: Should the project detail page use a simple description dump or a structured case study format?
+
+Recommended Answer: Structured case study with sections: Overview, Challenge, Solution, Key Features, Results, Tech Stack. Each section 2-4 sentences max. Back navigation uses Lucide ArrowLeft icon (no text).
+
+Answer: go with your recommendation
+
+Decision: Case study format with 6 sections. Icon-only back navigation using Lucide ArrowLeft. Page heading renamed to "All Case Studies".
+
+Reason: Makes the portfolio feel professional and polished, not like a spec sheet.
+
+### L10
+
+Status: current
+
+Question: Should the projects listing page heading say "All Projects" or "All Case Studies"?
+
+Recommended Answer: "All Case Studies" — aligns with the case study format on detail pages.
+
+Answer: recommended
+
+Decision: Rename page heading to "All Case Studies".
