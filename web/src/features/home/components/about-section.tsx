@@ -46,7 +46,7 @@ export function AboutSection() {
             ))}
           </div>
 
-          <div className="rounded-2xl bg-surface p-5 sm:col-span-1 sm:self-start lg:col-span-3">
+          <div className="rounded-2xl bg-surface p-5 sm:col-span-1 lg:col-span-3">
             <h3 className="text-xl font-bold sm:text-2xl">Mindset</h3>
             <p className="mt-3 text-xs leading-relaxed text-foreground/70 sm:text-sm">
               Building <span className="font-bold text-foreground">practical AI</span> that solves real problems. I focus on <span className="font-bold text-foreground">reliable workflows</span> over fancy demos.
@@ -54,7 +54,7 @@ export function AboutSection() {
           </div>
 
           <div className="rounded-2xl bg-surface sm:col-span-1 sm:row-span-2 sm:flex sm:items-center sm:justify-center sm:p-0 sm:overflow-hidden lg:col-span-6">
-            <div className="relative h-64 w-full overflow-hidden rounded-2xl sm:h-72 lg:h-full lg:min-h-[280px]">
+            <div className="relative h-72 w-full overflow-hidden rounded-2xl sm:h-96 lg:h-full lg:min-h-[340px]">
               <img
                 src={theme === "light" ? "/photo-light.jpg" : "/photo-dark.jpg"}
                 alt="Inam ul Haq"
@@ -63,7 +63,7 @@ export function AboutSection() {
             </div>
           </div>
 
-          <div className="rounded-2xl bg-surface p-5 sm:col-span-1 sm:self-start lg:col-span-3">
+          <div className="rounded-2xl bg-surface p-5 sm:col-span-1 lg:col-span-3">
             <h3 className="text-xl font-bold sm:text-2xl">Craft</h3>
             <p className="mt-3 text-xs leading-relaxed text-foreground/70 sm:text-sm">
               Building <span className="font-bold text-foreground">intelligent automation</span>, <span className="font-bold text-foreground">predictive models</span>, and <span className="font-bold text-foreground">LLM integrations</span> that streamline workflows.
