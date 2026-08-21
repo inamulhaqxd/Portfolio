@@ -1,6 +1,16 @@
 import Link from "next/link";
 import { SiteHeader } from "@/features/home/components/site-header";
 import { ArrowLeft, Home } from "lucide-react";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Projects",
+  description: "A collection of AI/ML projects — intelligent document processing, computer vision, NLP, predictive analytics, and more.",
+  openGraph: {
+    title: "Projects | Inam ul Haq Tariq",
+    description: "A collection of AI/ML projects — intelligent document processing, computer vision, NLP, predictive analytics, and more.",
+  },
+};
 
 const PROJECTS = [
   { title: "Intelligent document flow", slug: "intelligent-document-flow", description: "A document processing system that pulls structured data out of scanned PDFs, invoices, and forms.", image: "https://picsum.photos/seed/docflow/600/400" },

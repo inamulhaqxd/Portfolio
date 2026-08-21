@@ -3,11 +3,13 @@ import { describe, expect, it } from "vitest";
 import ServicesPage from "./page";
 
 describe("ServicesPage", () => {
-  it("renders a Coming Soon heading and a link back to the homepage", () => {
+  it("renders the services heading and service cards", () => {
     render(<ServicesPage />);
 
-    expect(screen.getByRole("heading", { name: "Services" })).toBeInTheDocument();
-    expect(screen.getByText("Coming Soon")).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /AI\/ML solutions tailored/ })).toBeInTheDocument();
+    expect(screen.getByText("Intelligent Automation")).toBeInTheDocument();
+    expect(screen.getByText("Computer Vision")).toBeInTheDocument();
+    expect(screen.getByText("NLP & Text Analytics")).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "Back to home" })).toHaveAttribute("href", "/");
   });
 });

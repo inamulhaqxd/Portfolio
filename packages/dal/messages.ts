@@ -1,5 +1,7 @@
-import { supabase } from '../shared/lib/supabase/server'
+import { createServerClient } from '../supabase/server'
 import type { Message } from '../types/message'
+
+const supabase = createServerClient()
 
 export async function getAllMessages(): Promise<Message[]> {
   const { data, error } = await supabase

@@ -3,6 +3,10 @@ import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { SiteHeader } from "./site-header";
 
+vi.mock("next/navigation", () => ({
+  usePathname: () => "/",
+}));
+
 describe("SiteHeader", () => {
   afterEach(() => {
     vi.restoreAllMocks();

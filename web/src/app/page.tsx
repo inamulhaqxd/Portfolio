@@ -1,5 +1,6 @@
 import { SiteHeader } from "@/features/home/components/site-header";
 import { AboutSection } from "@/features/home/components/about-section";
+import { ContactModal } from "@/features/contact/components/contact-modal";
 import Link from "next/link";
 
 const FEATURED_PROJECTS = [
@@ -74,9 +75,9 @@ export default async function Home() {
               <article key={name} className="group rounded-panel border border-line bg-background p-4 transition-all duration-300 hover:-translate-y-2 hover:border-accent hover:shadow-lg hover:shadow-accent/20 sm:p-6">
                 <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-full bg-accent transition-all duration-300 group-hover:scale-110 group-hover:shadow-md sm:mb-4 sm:h-12 sm:w-12">
                   <img
-                    src={`https://cdn.simpleicons.org/${slug}/ffffff?viewbox=auto`}
+                    src={`https://cdn.simpleicons.org/${slug}/1a1a1a?viewbox=auto`}
                     alt={name}
-                    className="h-5 w-5 transition-transform duration-300 group-hover:scale-110 sm:h-6 sm:w-6"
+                    className="h-5 w-5 transition-transform duration-300 group-hover:scale-110 sm:h-6 sm:w-6 skill-icon"
                   />
                 </div>
                 <h3 className="text-base font-bold transition-colors duration-300 group-hover:text-accent sm:text-xl">{name}</h3>
@@ -120,10 +121,10 @@ export default async function Home() {
             <p className="text-xs font-bold uppercase tracking-[0.18em] sm:text-sm">Let&apos;s make something useful</p>
             <div className="mt-5 flex flex-col justify-between gap-6 md:flex-row md:items-end md:gap-8">
               <h2 className="max-w-2xl text-3xl font-bold leading-none tracking-[-0.06em] sm:text-4xl md:text-6xl">Have an AI problem worth solving?</h2>
-              <a href="mailto:inamulhaq12290@gmail.com" className="group rounded-full bg-ink px-5 py-2.5 text-xs font-bold text-foreground transition-all duration-300 hover:bg-background hover:shadow-lg sm:px-6 sm:py-3 sm:text-sm">
+              <ContactModal>
                 Get in touch
                 <span className="ml-1 inline-block transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
-              </a>
+              </ContactModal>
             </div>
             <div className="mt-8 flex flex-wrap gap-4">
               <a href="https://github.com/inamulhaqxd" target="_blank" rel="noopener noreferrer" className="text-xs font-bold underline decoration-1 underline-offset-4 transition-all duration-300 hover:text-ink/70 hover:decoration-2 sm:text-sm">GitHub</a>

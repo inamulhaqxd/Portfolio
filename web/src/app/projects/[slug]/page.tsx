@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { SiteHeader } from "@/features/home/components/site-header";
-import { ArrowLeft, Home } from "lucide-react";
+import { ArrowLeft, Home, ChevronLeft, ChevronRight } from "lucide-react";
 import { ImageGallery } from "@/features/home/components/image-gallery";
+import type { Metadata } from "next";
 
 const PROJECTS = [
   {
@@ -114,6 +115,29 @@ const PROJECTS = [
   },
 ];
 
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const project = PROJECTS.find((p) => p.slug === slug);
+
+  if (!project) {
+    return { title: "Project Not Found" };
+  }
+
+  return {
+    title: project.name,
+    description: project.about.slice(0, 160),
+    openGraph: {
+      title: `${project.name} | Inam ul Haq Tariq`,
+      description: project.about.slice(0, 160),
+      images: project.images[0] ? [project.images[0]] : [],
+    },
+  };
+}
+
 export default async function ProjectDetailPage({
   params,
 }: {
@@ -140,6 +164,10 @@ export default async function ProjectDetailPage({
       </main>
     );
   }
+
+  const currentIndex = PROJECTS.findIndex((p) => p.slug === slug);
+  const prevProject = currentIndex > 0 ? PROJECTS[currentIndex - 1] : null;
+  const nextProject = currentIndex < PROJECTS.length - 1 ? PROJECTS[currentIndex + 1] : null;
 
   return (
     <main className="min-h-screen bg-background text-foreground">
@@ -180,16 +208,32 @@ export default async function ProjectDetailPage({
 
         <div className="my-10 h-px bg-line sm:my-12" />
 
-        <div className="flex flex-row flex-wrap gap-3 sm:gap-4">
-          <a href="#contact" className="group rounded-full bg-accent px-5 py-2.5 text-xs font-bold text-ink transition-all duration-300 hover:bg-accent-strong hover:shadow-lg hover:shadow-accent/30 sm:px-6 sm:py-3 sm:text-sm">
-            Discuss this project
-            <span className="ml-1 inline-block transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
-          </a>
-          <Link href="/projects" className="group inline-flex items-center gap-2 rounded-full border border-line px-5 py-2.5 text-xs font-bold text-center transition-all duration-300 hover:border-accent hover:text-accent hover:shadow-lg hover:shadow-accent/10 sm:px-6 sm:py-3 sm:text-sm">
-            <ArrowLeft className="h-3.5 w-3.5 transition-transform duration-300 group-hover:-translate-x-1" />
-            View more case studies
-          </Link>
-        </div>
+        <nav aria-label="Project navigation" className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          {prevProject ? (
+            <Link
+              href={`/projects/${prevProject.slug}`}
+              className="group flex items-center gap-3 rounded-panel border border-line bg-surface p-5 transition-all duration-300 hover:border-accent hover:shadow-lg hover:shadow-accent/10 sm:p-6"
+            >
+              <ChevronLeft className="h-4 w-4 shrink-0 text-foreground/40 transition-all duration-300 group-hover:-translate-x-1 group-hover:text-accent" />
+              <div>
+                <p className="text-xs font-bold text-foreground/40">Previous</p>
+                <p className="mt-0.5 text-sm font-bold transition-colors duration-300 group-hover:text-accent">{prevProject.name}</p>
+              </div>
+            </Link>
+          ) : <div />}
+          {nextProject ? (
+            <Link
+              href={`/projects/${nextProject.slug}`}
+              className="group flex items-center justify-end gap-3 rounded-panel border border-line bg-surface p-5 transition-all duration-300 hover:border-accent hover:shadow-lg hover:shadow-accent/10 sm:p-6"
+            >
+              <div className="text-right">
+                <p className="text-xs font-bold text-foreground/40">Next</p>
+                <p className="mt-0.5 text-sm font-bold transition-colors duration-300 group-hover:text-accent">{nextProject.name}</p>
+              </div>
+              <ChevronRight className="h-4 w-4 shrink-0 text-foreground/40 transition-all duration-300 group-hover:translate-x-1 group-hover:text-accent" />
+            </Link>
+          ) : <div />}
+        </nav>
       </article>
     </main>
   );

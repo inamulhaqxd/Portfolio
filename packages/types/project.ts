@@ -2,7 +2,7 @@ export interface Project {
   id: string
   title: string
   slug: string
-  description: string
+  caseStudy: string
   tech_tags: string[]
   live_demo_url: string | null
   github_url: string | null

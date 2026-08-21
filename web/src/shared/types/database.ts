@@ -6,7 +6,7 @@ export interface Database {
           id: string
           title: string
           slug: string
-          description: string
+          caseStudy: string
           tech_tags: string[]
           live_demo_url: string | null
           github_url: string | null
@@ -21,7 +21,7 @@ export interface Database {
           id?: string
           title: string
           slug: string
-          description: string
+          caseStudy: string
           tech_tags: string[]
           live_demo_url?: string | null
           github_url?: string | null
@@ -36,7 +36,7 @@ export interface Database {
           id?: string
           title?: string
           slug?: string
-          description?: string
+          caseStudy?: string
           tech_tags?: string[]
           live_demo_url?: string | null
           github_url?: string | null
@@ -47,6 +47,7 @@ export interface Database {
           created_at?: string
           updated_at?: string
         }
+        Relationships: []
       }
       messages: {
         Row: {
@@ -76,7 +77,11 @@ export interface Database {
           is_read?: boolean
           created_at?: string
         }
+        Relationships: []
       }
     }
+    Views: Record<string, never>
+    Functions: Record<string, never>
+    Enums: Record<string, never>
   }
 }
