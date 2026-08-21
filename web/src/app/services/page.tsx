@@ -68,7 +68,7 @@ export default function ServicesPage() {
           {SERVICES.map((service) => (
             <article
               key={service.title}
-              className="group rounded-panel border border-line bg-surface p-6 transition-all duration-300 hover:-translate-y-2 hover:border-accent hover:shadow-lg hover:shadow-accent/10 sm:p-8"
+              className="group rounded-panel glass p-6 transition-all duration-300 hover:-translate-y-2 hover:border-accent hover:shadow-lg hover:shadow-accent/10 sm:p-8"
             >
               <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-accent/10 transition-all duration-300 group-hover:bg-accent/20 group-hover:scale-110">
                 <service.icon className="h-6 w-6 text-accent" />
@@ -79,14 +79,14 @@ export default function ServicesPage() {
           ))}
         </div>
 
-        <div className="mt-16 rounded-window bg-ink p-6 text-center sm:mt-20 sm:p-10 md:p-12">
+        <div className="mt-16 rounded-window glass-deep p-6 text-center sm:mt-20 sm:p-10 md:p-12">
           <p className="text-xs font-bold uppercase tracking-[0.18em] text-accent sm:text-sm">Ready to start?</p>
           <h2 className="mt-4 text-2xl font-bold tracking-[-0.05em] sm:text-3xl md:text-4xl">Let&apos;s discuss your project</h2>
           <p className="mx-auto mt-4 max-w-lg text-sm text-foreground/60 sm:text-base">
             Whether you have a specific problem in mind or just exploring what AI can do for your business — I&apos;m happy to chat.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <a href="/#contact" className="group rounded-full bg-accent px-6 py-3 text-sm font-bold text-ink transition-all duration-300 hover:bg-accent-strong hover:shadow-lg hover:shadow-accent/30">
+            <a href="/#contact" className="group rounded-full metallic px-6 py-3 text-sm font-bold text-ink transition-all duration-300 hover:shadow-lg hover:shadow-accent/30">
               Get in touch
               <span className="ml-1 inline-block transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
             </a>

@@ -35,3 +35,7 @@ _Avoid_: middleware, middleware.ts
 **DAL (Data Access Layer)**:
 Server-only code in `packages/dal/` that contains all Supabase database queries. Both `web/` and `admin/` import from here.
 _Avoid_: db layer, data layer, repository
+
+**Neural Network Field**:
+The Hero section's interactive 3D centerpiece — glowing nodes connected by edges, resembling a neural network, that reacts to the visitor's cursor. Rendered client-side only.
+_Avoid_: particle background, 3D background, canvas animation

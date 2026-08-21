@@ -34,11 +34,10 @@ export default async function Home() {
             AI/ML engineer specializing in intelligent automation. I build systems that streamline workflows and boost productivity.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <a href="#projects" className="group rounded-full bg-accent px-5 py-2.5 text-xs font-bold text-ink transition-all duration-300 hover:bg-accent-strong hover:shadow-lg hover:shadow-accent/30 sm:px-6 sm:py-3 sm:text-sm">
+            <a href="#projects" className="group rounded-full metallic px-5 py-2.5 text-xs font-bold text-ink transition-all duration-300 hover:shadow-lg hover:shadow-accent/30 sm:px-6 sm:py-3 sm:text-sm">
               View Projects
-              <span className="ml-1 inline-block transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
             </a>
-            <a href="#contact" className="rounded-full border border-line px-5 py-2.5 text-xs font-bold transition-all duration-300 hover:border-accent hover:text-accent hover:shadow-lg hover:shadow-accent/10 sm:px-6 sm:py-3 sm:text-sm">
+            <a href="#contact" className="rounded-full glass border border-line px-5 py-2.5 text-xs font-bold transition-all duration-300 hover:border-accent hover:text-accent hover:shadow-lg hover:shadow-accent/10 sm:px-6 sm:py-3 sm:text-sm">
               Contact Me
             </a>
           </div>
@@ -72,8 +71,8 @@ export default async function Home() {
               { name: "REST", slug: "postman" },
               { name: "AI Agents", slug: "n8n" },
             ].map(({ name, slug }) => (
-              <article key={name} className="group rounded-panel border border-line bg-background p-4 transition-all duration-300 hover:-translate-y-2 hover:border-accent hover:shadow-lg hover:shadow-accent/20 sm:p-6">
-                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-full bg-accent transition-all duration-300 group-hover:scale-110 group-hover:shadow-md sm:mb-4 sm:h-12 sm:w-12">
+              <article key={name} className="group rounded-panel glass p-4 transition-all duration-300 hover:-translate-y-2 hover:border-accent hover:shadow-lg hover:shadow-accent/20 sm:p-6">
+                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-full metallic transition-all duration-300 group-hover:scale-110 group-hover:shadow-md sm:mb-4 sm:h-12 sm:w-12">
                   <img
                     src={`https://cdn.simpleicons.org/${slug}/1a1a1a?viewbox=auto`}
                     alt={name}
@@ -89,7 +88,7 @@ export default async function Home() {
 
       <section id="projects" className="relative z-10 py-16 sm:py-20 md:py-28" style={{ animation: 'fadeInUp 0.6s ease-out 0.1s forwards', opacity: 0 }}>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8 lg:px-12">
-          <div className="rounded-window bg-ink p-5 shadow-panel sm:p-8 md:p-12">
+          <div className="rounded-window glass-deep p-5 sm:p-8 md:p-12">
             <p className="text-xs font-bold uppercase tracking-[0.18em] text-accent sm:text-sm">Featured work</p>
             <div className="mt-5 flex flex-col justify-between gap-4 md:flex-row md:items-end md:gap-6">
               <h2 className="max-w-xl text-3xl font-bold leading-none tracking-[-0.05em] sm:text-4xl md:text-5xl">Projects that turn complex problems into clear outcomes.</h2>
@@ -98,7 +97,7 @@ export default async function Home() {
             <div className="stagger mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
               {FEATURED_PROJECTS.map((project) => (
                 <Link key={project.slug} href={`/projects/${project.slug}`} className="flex">
-                  <article className="group flex flex-col rounded-panel bg-surface p-4 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg hover:shadow-accent/10 sm:p-5 w-full">
+                  <article className="group flex flex-col rounded-panel bg-surface/60 backdrop-blur-sm p-4 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg hover:shadow-accent/10 sm:p-5 w-full">
                     <div className="h-36 overflow-hidden rounded-2xl sm:h-44">
                       <img src={project.image} alt={project.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" />
                     </div>
@@ -117,7 +116,7 @@ export default async function Home() {
 
       <section id="contact" className="relative z-10 py-16 sm:py-20 md:py-28" style={{ animation: 'fadeInUp 0.6s ease-out 0.2s forwards', opacity: 0 }}>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8 lg:px-12">
-          <div className="rounded-window bg-accent p-5 text-ink sm:p-8 md:p-12">
+          <div className="rounded-window metallic p-5 text-ink sm:p-8 md:p-12">
             <p className="text-xs font-bold uppercase tracking-[0.18em] sm:text-sm">Let&apos;s make something useful</p>
             <div className="mt-5 flex flex-col justify-between gap-6 md:flex-row md:items-end md:gap-8">
               <h2 className="max-w-2xl text-3xl font-bold leading-none tracking-[-0.06em] sm:text-4xl md:text-6xl">Have an AI problem worth solving?</h2>

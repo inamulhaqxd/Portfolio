@@ -39,7 +39,7 @@ export default async function ProjectsPage() {
         <div className="stagger mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:mt-12 lg:grid-cols-3">
           {PROJECTS.map((project) => (
             <Link key={project.slug} href={`/projects/${project.slug}`} className="flex">
-              <article className="group flex flex-col rounded-panel border border-line bg-surface p-4 transition-all duration-300 hover:-translate-y-2 hover:border-accent hover:shadow-lg hover:shadow-accent/10 sm:p-5 w-full">
+              <article className="group flex flex-col rounded-panel glass p-4 transition-all duration-300 hover:-translate-y-2 hover:border-accent hover:shadow-lg hover:shadow-accent/10 sm:p-5 w-full">
                 <div className="h-36 overflow-hidden rounded-2xl sm:h-44">
                   <img src={project.image} alt={project.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" />
                 </div>

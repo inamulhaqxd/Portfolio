@@ -49,7 +49,7 @@ export function SiteHeader() {
     <header
       data-scrolled={scrolled ? "true" : "false"}
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        scrolled ? "bg-background/95 backdrop-blur-md shadow-sm" : "bg-transparent"
+        scrolled ? "border-b border-line shadow-[0_1px_0_rgba(255,214,90,0.08)] bg-background/80 backdrop-blur-sm" : "bg-transparent"
       }`}
     >
       <nav
@@ -84,7 +84,7 @@ export function SiteHeader() {
           <ThemeToggle />
           <a
             href={isHome ? "#contact" : "/#contact"}
-            className="hidden rounded-full bg-accent px-4 py-2 text-xs font-bold text-ink transition-all duration-300 hover:bg-accent-strong hover:shadow-lg hover:shadow-accent/30 sm:px-5 md:inline-flex"
+            className="hidden rounded-full metallic px-4 py-2 text-xs font-bold text-ink transition-all duration-300 hover:shadow-lg hover:shadow-accent/30 sm:px-5 md:inline-flex"
           >
             Let&apos;s talk
           </a>
@@ -92,7 +92,7 @@ export function SiteHeader() {
           <button
             type="button"
             aria-label={mobileOpen ? "Close navigation" : "Open navigation"}
-            className="flex size-8 items-center justify-center rounded-lg border border-line text-foreground transition-all duration-300 hover:border-accent hover:text-accent hover:shadow-md sm:size-9 md:hidden"
+            className="flex size-8 items-center justify-center rounded-lg border border-line bg-foreground/[0.03] backdrop-blur-sm text-foreground transition-all duration-300 hover:border-accent hover:bg-accent/10 hover:text-accent hover:shadow-md sm:size-9 md:hidden"
             onClick={() => setMobileOpen((prev) => !prev)}
           >
             {mobileOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
@@ -101,7 +101,7 @@ export function SiteHeader() {
       </nav>
 
       {mobileOpen && (
-        <div className="border-t border-line bg-background/95 backdrop-blur md:hidden">
+        <div className="border-t border-line bg-background/80 backdrop-blur-sm md:hidden">
           <div className="mx-auto flex max-w-7xl flex-col gap-1 px-4 pb-5 pt-4 sm:px-6 lg:px-12">
             {NAV_LINKS.map((link) => (
               <Link
