@@ -1384,7 +1384,6 @@ window.addEventListener('mouseup', () => {
 });
 
 document.addEventListener('touchstart', e => {
-    e.preventDefault();
     let rect = canvas.getBoundingClientRect();
     const touches = e.targetTouches;
     while (touches.length >= pointers.length)
@@ -1394,10 +1393,9 @@ document.addEventListener('touchstart', e => {
         let posY = scaleByPixelRatio(touches[i].clientY - rect.top);
         updatePointerDownData(pointers[i + 1], touches[i].identifier, posX, posY);
     }
-}, { passive: false });
+}, { passive: true });
 
 document.addEventListener('touchmove', e => {
-    e.preventDefault();
     let rect = canvas.getBoundingClientRect();
     const touches = e.targetTouches;
     for (let i = 0; i < touches.length; i++) {
@@ -1407,7 +1405,7 @@ document.addEventListener('touchmove', e => {
         let posY = scaleByPixelRatio(touches[i].clientY - rect.top);
         updatePointerMoveData(pointer, posX, posY);
     }
-}, { passive: false });
+}, { passive: true });
 
 window.addEventListener('touchend', e => {
     const touches = e.changedTouches;
