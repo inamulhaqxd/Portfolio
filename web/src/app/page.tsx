@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { SiteHeader } from "@/features/home/components/site-header";
 import { AboutSection } from "@/features/home/components/about-section";
 import { ContactModal } from "@/features/contact/components/contact-modal";
+import { FluidSimulation } from "@/features/home/components/fluid-simulation";
 import Link from "next/link";
 
 const FEATURED_PROJECTS = [
@@ -28,46 +29,54 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="relative overflow-hidden bg-background text-foreground">
+    <main className="relative overflow-hidden text-foreground">
       <SiteHeader />
 
-      <section id="hero" className="relative z-10 mx-auto flex min-h-[100dvh] max-w-7xl flex-col items-center justify-center px-4 pb-16 pt-28 text-center sm:px-6 sm:pt-32 md:px-8 lg:px-12">
+      <section id="hero" className="hero-section relative min-h-[100dvh] overflow-hidden">
+        <FluidSimulation />
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 -z-10 opacity-[0.07]"
+          className="pointer-events-none absolute inset-0 z-[1] opacity-[0.07]"
           style={{
             backgroundImage:
               "radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)",
             backgroundSize: "32px 32px",
           }}
         />
-
-        <div className="stagger">
-          <p className="mb-4 text-xs font-bold uppercase tracking-[0.18em] text-accent sm:text-sm">AI/ML Engineer</p>
-          <h1 className="max-w-4xl text-4xl font-bold leading-[0.95] tracking-[-0.06em] sm:text-5xl md:text-6xl lg:text-7xl">
-            Inam ul Haq Tariq
-          </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-sm leading-relaxed text-foreground/70 sm:text-base md:text-lg">
-            AI/ML engineer specializing in intelligent automation. I build systems that streamline workflows and boost productivity.
-          </p>
-          <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <button
-              type="button"
-              onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}
-              className="group rounded-full metallic px-5 py-2.5 text-xs font-bold text-ink transition-all duration-300 hover:shadow-lg hover:shadow-accent/30 sm:px-6 sm:py-3 sm:text-sm"
-            >
-              View Projects
-            </button>
-            <button
-              type="button"
-              onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
-              className="rounded-full glass border border-line px-5 py-2.5 text-xs font-bold transition-all duration-300 hover:border-accent hover:text-accent hover:shadow-lg hover:shadow-accent/10 sm:px-6 sm:py-3 sm:text-sm"
-            >
-              Contact Me
-            </button>
+        <div className="relative z-[2] mx-auto flex min-h-[100dvh] max-w-7xl flex-col items-center justify-center px-4 pb-16 pt-28 text-center sm:px-6 sm:pt-32 md:px-8 lg:px-12">
+          <div className="stagger">
+            <p className="mb-4 text-xs font-bold uppercase tracking-[0.18em] text-accent sm:text-sm">AI/ML Engineer</p>
+            <h1 className="max-w-4xl text-4xl font-bold leading-[0.95] tracking-[-0.06em] sm:text-5xl md:text-6xl lg:text-7xl">
+              Inam ul Haq Tariq
+            </h1>
+            <p className="mx-auto mt-6 max-w-2xl text-sm leading-relaxed text-foreground/70 sm:text-base md:text-lg">
+              AI/ML engineer specializing in intelligent automation. I build systems that streamline workflows and boost productivity.
+            </p>
+            <div className="mt-8 flex flex-wrap justify-center gap-3">
+              <button
+                type="button"
+                onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}
+                className="group rounded-full metallic px-5 py-2.5 text-xs font-bold text-ink transition-all duration-300 hover:shadow-lg hover:shadow-accent/30 sm:px-6 sm:py-3 sm:text-sm"
+              >
+                View Projects
+              </button>
+              <button
+                type="button"
+                onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+                className="rounded-full glass border border-line px-5 py-2.5 text-xs font-bold transition-all duration-300 hover:border-accent hover:text-accent hover:shadow-lg hover:shadow-accent/10 sm:px-6 sm:py-3 sm:text-sm"
+              >
+                Contact Me
+              </button>
+            </div>
           </div>
         </div>
       </section>
+
+      <div className="relative z-10 -mt-1">
+        <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full block" preserveAspectRatio="none">
+          <path d="M0,0 L1440,0 L1440,20 Q720,60 0,20 Z" className="fill-background" />
+        </svg>
+      </div>
 
       <AboutSection />
 
