@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect } from "react";
 import { SiteHeader } from "@/features/home/components/site-header";
 import { AboutSection } from "@/features/home/components/about-section";
 import { ContactModal } from "@/features/contact/components/contact-modal";
@@ -9,7 +12,21 @@ const FEATURED_PROJECTS = [
   { title: "Workflow insights", slug: "workflow-insights", description: "A dashboard that visualizes how business processes actually run and where bottlenecks form.", image: "https://picsum.photos/seed/workflow/600/400" },
 ];
 
-export default async function Home() {
+export default function Home() {
+  useEffect(() => {
+    const hash = window.location.hash.slice(1);
+    if (hash) {
+      const timer = setTimeout(() => {
+        const el = document.getElementById(hash);
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth" });
+          history.replaceState(null, "", window.location.pathname);
+        }
+      }, 100);
+      return () => clearTimeout(timer);
+    }
+  }, []);
+
   return (
     <main className="relative overflow-hidden bg-background text-foreground">
       <SiteHeader />
@@ -34,12 +51,20 @@ export default async function Home() {
             AI/ML engineer specializing in intelligent automation. I build systems that streamline workflows and boost productivity.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <a href="#projects" className="group rounded-full metallic px-5 py-2.5 text-xs font-bold text-ink transition-all duration-300 hover:shadow-lg hover:shadow-accent/30 sm:px-6 sm:py-3 sm:text-sm">
+            <button
+              type="button"
+              onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}
+              className="group rounded-full metallic px-5 py-2.5 text-xs font-bold text-ink transition-all duration-300 hover:shadow-lg hover:shadow-accent/30 sm:px-6 sm:py-3 sm:text-sm"
+            >
               View Projects
-            </a>
-            <a href="#contact" className="rounded-full glass border border-line px-5 py-2.5 text-xs font-bold transition-all duration-300 hover:border-accent hover:text-accent hover:shadow-lg hover:shadow-accent/10 sm:px-6 sm:py-3 sm:text-sm">
+            </button>
+            <button
+              type="button"
+              onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+              className="rounded-full glass border border-line px-5 py-2.5 text-xs font-bold transition-all duration-300 hover:border-accent hover:text-accent hover:shadow-lg hover:shadow-accent/10 sm:px-6 sm:py-3 sm:text-sm"
+            >
               Contact Me
-            </a>
+            </button>
           </div>
         </div>
       </section>
@@ -92,7 +117,13 @@ export default async function Home() {
             <p className="text-xs font-bold uppercase tracking-[0.18em] text-accent sm:text-sm">Featured work</p>
             <div className="mt-5 flex flex-col justify-between gap-4 md:flex-row md:items-end md:gap-6">
               <h2 className="max-w-xl text-3xl font-bold leading-none tracking-[-0.05em] sm:text-4xl md:text-5xl">Projects that turn complex problems into clear outcomes.</h2>
-              <a href="#contact" className="text-xs font-bold text-accent underline decoration-1 underline-offset-4 hover:text-accent-strong sm:text-sm">Discuss a project</a>
+              <button
+                type="button"
+                onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+                className="text-xs font-bold text-accent underline decoration-1 underline-offset-4 hover:text-accent-strong sm:text-sm"
+              >
+                Discuss a project
+              </button>
             </div>
             <div className="stagger mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
               {FEATURED_PROJECTS.map((project) => (

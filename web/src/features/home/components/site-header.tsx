@@ -2,22 +2,23 @@
 
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { ThemeToggle } from "./theme-toggle";
 import { Menu, X } from "lucide-react";
 
 const NAV_LINKS = [
-  { href: "/#hero", label: "Home" },
-  { href: "/#about", label: "About" },
-  { href: "/#projects", label: "Projects" },
-  { href: "/services", label: "Services" },
-  { href: "/#contact", label: "Contact" },
+  { id: "hero", label: "Home" },
+  { id: "about", label: "About" },
+  { id: "projects", label: "Projects" },
+  { id: "services", href: "/services", label: "Services" },
+  { id: "contact", label: "Contact" },
 ];
 
 export function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
+  const router = useRouter();
   const isHome = pathname === "/";
 
   useEffect(() => {
@@ -38,12 +39,18 @@ export function SiteHeader() {
 
   const closeMobile = useCallback(() => setMobileOpen(false), []);
 
-  const getHref = (href: string) => {
-    if (isHome && href.startsWith("/#")) {
-      return href.slice(1);
+  const scrollTo = useCallback((id: string) => {
+    closeMobile();
+    if (!isHome) {
+      router.push(`/#${id}`);
+      return;
     }
-    return href;
-  };
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+      history.replaceState(null, "", window.location.pathname);
+    }
+  }, [closeMobile, isHome, router]);
 
   return (
     <header
@@ -56,38 +63,49 @@ export function SiteHeader() {
         aria-label="Primary navigation"
         className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 sm:py-4 md:px-8 lg:px-12"
       >
-        <a href={isHome ? "#hero" : "/#hero"} className="text-lg font-bold tracking-tight transition-all duration-300 hover:text-accent sm:text-xl md:text-2xl">
+        <button
+          type="button"
+          onClick={() => scrollTo("hero")}
+          className="text-lg font-bold tracking-tight transition-all duration-300 hover:text-accent sm:text-xl md:text-2xl"
+        >
           Inam<span className="text-accent">.</span>
-        </a>
+        </button>
 
         <div className="hidden items-center gap-5 text-sm text-foreground/70 md:flex lg:gap-7">
           {NAV_LINKS.map((link) => {
-            const isActive = pathname === link.href || pathname === link.href.replace("/#", "/");
+            if (link.href) {
+              return (
+                <Link
+                  key={link.id}
+                  href={link.href}
+                  className="relative transition-all duration-300 hover:text-accent"
+                >
+                  {link.label}
+                </Link>
+              );
+            }
             return (
-              <Link
-                key={link.href}
-                href={getHref(link.href)}
-                className={`relative transition-all duration-300 hover:text-accent ${
-                  isActive ? "text-accent" : ""
-                }`}
+              <button
+                key={link.id}
+                type="button"
+                onClick={() => scrollTo(link.id)}
+                className="relative transition-all duration-300 hover:text-accent"
               >
                 {link.label}
-                {isActive && (
-                  <span className="absolute -bottom-1 left-0 h-0.5 w-full bg-accent" />
-                )}
-              </Link>
+              </button>
             );
           })}
         </div>
 
         <div className="flex items-center gap-2 sm:gap-3">
           <ThemeToggle />
-          <a
-            href={isHome ? "#contact" : "/#contact"}
+          <button
+            type="button"
+            onClick={() => scrollTo("contact")}
             className="hidden rounded-full metallic px-4 py-2 text-xs font-bold text-ink transition-all duration-300 hover:shadow-lg hover:shadow-accent/30 sm:px-5 md:inline-flex"
           >
             Let&apos;s talk
-          </a>
+          </button>
 
           <button
             type="button"
@@ -103,23 +121,37 @@ export function SiteHeader() {
       {mobileOpen && (
         <div className="border-t border-line bg-background/80 backdrop-blur-sm md:hidden">
           <div className="mx-auto flex max-w-7xl flex-col gap-1 px-4 pb-5 pt-4 sm:px-6 lg:px-12">
-            {NAV_LINKS.map((link) => (
-              <Link
-                key={link.href}
-                href={getHref(link.href)}
-                onClick={closeMobile}
-                className="rounded-lg px-3 py-2.5 text-sm font-medium text-foreground/80 transition-all duration-300 hover:bg-surface hover:text-accent"
-              >
-                {link.label}
-              </Link>
-            ))}
-            <a
-              href={isHome ? "#contact" : "/#contact"}
-              onClick={closeMobile}
+            {NAV_LINKS.map((link) => {
+              if (link.href) {
+                return (
+                  <Link
+                    key={link.id}
+                    href={link.href}
+                    onClick={closeMobile}
+                    className="rounded-lg px-3 py-2.5 text-sm font-medium text-foreground/80 transition-all duration-300 hover:bg-surface hover:text-accent"
+                  >
+                    {link.label}
+                  </Link>
+                );
+              }
+              return (
+                <button
+                  key={link.id}
+                  type="button"
+                  onClick={() => scrollTo(link.id)}
+                  className="rounded-lg px-3 py-2.5 text-left text-sm font-medium text-foreground/80 transition-all duration-300 hover:bg-surface hover:text-accent"
+                >
+                  {link.label}
+                </button>
+              );
+            })}
+            <button
+              type="button"
+              onClick={() => scrollTo("contact")}
               className="mt-2 rounded-full bg-accent px-5 py-2.5 text-center text-sm font-bold text-ink transition-all duration-300 hover:bg-accent-strong hover:shadow-lg hover:shadow-accent/30"
             >
               Let&apos;s talk
-            </a>
+            </button>
           </div>
         </div>
       )}
