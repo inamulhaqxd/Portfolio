@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { X, Send } from "lucide-react";
 
 interface Message {
@@ -21,12 +21,16 @@ const SUGGESTED_QUESTIONS = [
   "Tell me about Inam's AI/ML experience",
 ];
 
+const WORD_DELAY = 30; // ms between words
+
 export function AiChatOverlay({ isOpen, onClose }: AiChatOverlayProps) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const typingRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     if (isOpen) {
@@ -35,7 +39,7 @@ export function AiChatOverlay({ isOpen, onClose }: AiChatOverlayProps) {
         {
           id: "greeting",
           role: "assistant",
-          content: "Hi! I'm Inam's AI assistant. Ask me about his projects, skills, or availability.",
+          content: "Hi! I am Inam's assistant. I am here to guide you about Inam's expertise and how/why you need to hire him. Feel free to ask about his skills or projects!",
         },
       ]);
       setTimeout(() => inputRef.current?.focus(), 100);
@@ -44,6 +48,7 @@ export function AiChatOverlay({ isOpen, onClose }: AiChatOverlayProps) {
     }
     return () => {
       document.body.style.overflow = "";
+      if (typingRef.current) clearTimeout(typingRef.current);
     };
   }, [isOpen]);
 
@@ -51,8 +56,31 @@ export function AiChatOverlay({ isOpen, onClose }: AiChatOverlayProps) {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
+  const typeWords = useCallback((messageId: string, fullText: string) => {
+    setIsTyping(true);
+    const words = fullText.split(" ");
+    let currentIndex = 0;
+
+    const addNextWord = () => {
+      if (currentIndex < words.length) {
+        const currentContent = words.slice(0, currentIndex + 1).join(" ");
+        setMessages((prev) =>
+          prev.map((msg) =>
+            msg.id === messageId ? { ...msg, content: currentContent } : msg
+          )
+        );
+        currentIndex++;
+        typingRef.current = setTimeout(addNextWord, WORD_DELAY);
+      } else {
+        setIsTyping(false);
+      }
+    };
+
+    addNextWord();
+  }, []);
+
   const handleSend = async (content: string) => {
-    if (!content.trim() || isLoading) return;
+    if (!content.trim() || isLoading || isTyping) return;
 
     const userMessage: Message = {
       id: Date.now().toString(),
@@ -76,17 +104,24 @@ export function AiChatOverlay({ isOpen, onClose }: AiChatOverlayProps) {
       const assistantMessage: Message = {
         id: (Date.now() + 1).toString(),
         role: "assistant",
-        content: data.success ? data.response : "Something went wrong. Please try again.",
+        content: "",
       };
 
       setMessages((prev) => [...prev, assistantMessage]);
+
+      if (data.success) {
+        typeWords(assistantMessage.id, data.response);
+      } else {
+        typeWords(assistantMessage.id, "Something went wrong. Please try again.");
+      }
     } catch {
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
         role: "assistant",
-        content: "Something went wrong. Please try again.",
+        content: "",
       };
       setMessages((prev) => [...prev, errorMessage]);
+      typeWords(errorMessage.id, "Something went wrong. Please try again.");
     } finally {
       setIsLoading(false);
     }
@@ -134,12 +169,19 @@ export function AiChatOverlay({ isOpen, onClose }: AiChatOverlayProps) {
                   }`}
                 >
                   {message.content}
+                  {isTyping && message.role === "assistant" && message.content === "" && (
+                    <span className="inline-flex gap-1">
+                      <span className="h-2 w-2 animate-bounce rounded-full bg-foreground/40 [animation-delay:-0.3s]" />
+                      <span className="h-2 w-2 animate-bounce rounded-full bg-foreground/40 [animation-delay:-0.15s]" />
+                      <span className="h-2 w-2 animate-bounce rounded-full bg-foreground/40" />
+                    </span>
+                  )}
                 </div>
               </div>
             ))}
 
             {/* Suggested questions (show only when there's just the greeting) */}
-            {messages.length === 1 && (
+            {messages.length === 1 && !isTyping && (
               <div className="flex flex-wrap gap-2 pt-2">
                 {SUGGESTED_QUESTIONS.map((question) => (
                   <button
@@ -183,12 +225,12 @@ export function AiChatOverlay({ isOpen, onClose }: AiChatOverlayProps) {
               placeholder="Ask about Inam's work..."
               maxLength={500}
               className="flex-1 rounded-full border border-line bg-surface/40 px-4 py-2.5 text-sm text-foreground placeholder-foreground/40 outline-none transition-all duration-200 focus:border-accent"
-              disabled={isLoading}
+              disabled={isLoading || isTyping}
             />
             <button
               type="button"
               onClick={() => handleSend(input)}
-              disabled={!input.trim() || isLoading}
+              disabled={!input.trim() || isLoading || isTyping}
               className="flex h-10 w-10 items-center justify-center rounded-full bg-accent text-ink transition-all duration-200 hover:shadow-lg hover:shadow-accent/30 disabled:opacity-50 disabled:cursor-not-allowed"
               aria-label="Send message"
             >

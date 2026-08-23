@@ -20,7 +20,7 @@ describe("AiChatOverlay", () => {
 
   it("displays greeting message", () => {
     render(<AiChatOverlay isOpen={true} onClose={vi.fn()} />);
-    expect(screen.getByText("Hi! I'm Inam's AI assistant. Ask me about his projects, skills, or availability.")).toBeInTheDocument();
+    expect(screen.getByText("Hi! I am Inam's assistant. I am here to guide you about Inam's expertise and how/why you need to hire him. Feel free to ask about his skills or projects!")).toBeInTheDocument();
   });
 
   it("displays suggested questions", () => {
