@@ -347,6 +347,60 @@ body {
   animation: revealUnderline 0.8s ease-out 0.8s forwards;
 }
 
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 8s linear infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    filter: drop-shadow(0 0 2px var(--accent));
+  }
+  50% {
+    filter: drop-shadow(0 0 8px var(--accent)) drop-shadow(0 0 12px var(--accent));
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes ai-logo-rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes ai-logo-pulse {
+  0%, 100% {
+    box-shadow: 0 0 8px rgba(168, 85, 247, 0.5), 0 0 16px rgba(34, 211, 238, 0.3);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 12px rgba(168, 85, 247, 0.8), 0 0 24px rgba(34, 211, 238, 0.5), 0 0 32px rgba(232, 121, 249, 0.3);
+    transform: scale(1.05);
+  }
+}
+
+.ai-logo-icon {
+  animation: ai-logo-pulse 2s ease-in-out infinite;
+  border-radius: 50%;
+}
+
+@keyframes gemini-float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-2px) rotate(5deg); }
+  50% { transform: translateY(0) rotate(0deg); }
+  75% { transform: translateY(2px) rotate(-5deg); }
+}
+
+.gemini-logo-animated {
+  animation: gemini-float 3s ease-in-out infinite;
+}
+
 @keyframes blink {
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }

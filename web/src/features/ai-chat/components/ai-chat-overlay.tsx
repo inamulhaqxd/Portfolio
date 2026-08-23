@@ -142,7 +142,34 @@ export function AiChatOverlay({ isOpen, onClose }: AiChatOverlayProps) {
       <div className="relative z-10 flex h-[80vh] w-full max-w-2xl flex-col rounded-window glass-deep shadow-panel">
         {/* Header */}
         <div className="flex items-center justify-between border-b border-line px-6 py-4">
-          <h2 className="text-lg font-bold">Ask AI</h2>
+          <div className="flex items-center gap-2">
+            <svg viewBox="0 0 32 32" className="h-5 w-5" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M16 2C16 2 18 8 22 12C26 16 32 16 32 16C32 16 26 16 22 20C18 24 16 30 16 30C16 30 14 24 10 20C6 16 0 16 0 16C0 16 6 16 10 12C14 8 16 2 16 2Z" fill="url(#gemini-gradient-header)" />
+              <path d="M26 22C26 22 27 24.5 28.5 26C30 27.5 32 28 32 28C32 28 30 28 28.5 29.5C27 31 26 32 26 32C26 32 25 31 23.5 29.5C22 28 20 28 20 28C20 28 22 28 23.5 26.5C25 25 26 22 26 22Z" fill="url(#gemini-gradient-small-header)" />
+              <defs>
+                <linearGradient id="gemini-gradient-header" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+                  <stop stopColor="#4285F4">
+                    <animate attributeName="stop-color" values="#4285F4;#9B72CB;#D81B60;#4285F4" dur="3s" repeatCount="indefinite" />
+                  </stop>
+                  <stop offset="0.5" stopColor="#9B72CB">
+                    <animate attributeName="stop-color" values="#9B72CB;#D81B60;#4285F4;#9B72CB" dur="3s" repeatCount="indefinite" />
+                  </stop>
+                  <stop offset="1" stopColor="#D81B60">
+                    <animate attributeName="stop-color" values="#D81B60;#4285F4;#9B72CB;#D81B60" dur="3s" repeatCount="indefinite" />
+                  </stop>
+                </linearGradient>
+                <linearGradient id="gemini-gradient-small-header" x1="20" y1="22" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+                  <stop stopColor="#9B72CB">
+                    <animate attributeName="stop-color" values="#9B72CB;#D81B60;#4285F4;#9B72CB" dur="3s" repeatCount="indefinite" />
+                  </stop>
+                  <stop offset="1" stopColor="#D81B60">
+                    <animate attributeName="stop-color" values="#D81B60;#4285F4;#9B72CB;#D81B60" dur="3s" repeatCount="indefinite" />
+                  </stop>
+                </linearGradient>
+              </defs>
+            </svg>
+            <h2 className="text-lg font-bold">Ask AI</h2>
+          </div>
           <button
             type="button"
             onClick={onClose}
