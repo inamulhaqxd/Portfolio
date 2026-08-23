@@ -39,3 +39,11 @@ _Avoid_: db layer, data layer, repository
 **Neural Network Field**:
 The Hero section's interactive 3D centerpiece — glowing nodes connected by edges, resembling a neural network, that reacts to the visitor's cursor. Rendered client-side only.
 _Avoid_: particle background, 3D background, canvas animation
+
+**AI Chat Overlay**:
+A full-screen modal chat interface that allows visitors to ask questions and receive AI-generated recommendations about Inam's work. Powered by Gemini API.
+_Avoid_: chatbot, chat widget, AI assistant popup
+
+**Knowledge Base**:
+A Supabase table (`knowledge_base`) storing question-answer pairs that the AI uses to provide more accurate responses. Managed via admin dashboard (coming later).
+_Avoid_: faq, q&a, knowledge

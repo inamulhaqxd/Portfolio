@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { SiteHeader } from "@/features/home/components/site-header";
 import { AboutSection } from "@/features/home/components/about-section";
 import { ContactModal } from "@/features/contact/components/contact-modal";
 import { FluidSimulation } from "@/features/home/components/fluid-simulation";
+import { AiChatOverlay } from "@/features/ai-chat/components/ai-chat-overlay";
 import Link from "next/link";
 
 const FEATURED_PROJECTS = [
@@ -14,6 +15,8 @@ const FEATURED_PROJECTS = [
 ];
 
 export default function Home() {
+  const [isChatOpen, setIsChatOpen] = useState(false);
+
   useEffect(() => {
     const hash = window.location.hash.slice(1);
     if (hash) {
@@ -29,6 +32,7 @@ export default function Home() {
   }, []);
 
   return (
+    <>
     <main className="relative overflow-hidden text-foreground">
       <SiteHeader />
 
@@ -55,17 +59,17 @@ export default function Home() {
             <div className="mt-8 flex flex-wrap justify-center gap-3">
               <button
                 type="button"
-                onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}
+                onClick={() => setIsChatOpen(true)}
                 className="group rounded-full metallic px-5 py-2.5 text-xs font-bold text-ink transition-all duration-300 hover:shadow-lg hover:shadow-accent/30 sm:px-6 sm:py-3 sm:text-sm"
               >
-                View Projects
+                Ask AI
               </button>
               <button
                 type="button"
-                onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+                onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}
                 className="rounded-full glass border border-line px-5 py-2.5 text-xs font-bold transition-all duration-300 hover:border-accent hover:text-accent hover:shadow-lg hover:shadow-accent/10 sm:px-6 sm:py-3 sm:text-sm"
               >
-                Contact Me
+                View Projects
               </button>
             </div>
           </div>
@@ -174,5 +178,7 @@ export default function Home() {
         </div>
       </section>
     </main>
+    <AiChatOverlay isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />
+    </>
   );
 }
