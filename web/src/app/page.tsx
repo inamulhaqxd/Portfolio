@@ -1,11 +1,16 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { SiteHeader } from "@/features/home/components/site-header";
 import { AboutSection } from "@/features/home/components/about-section";
 import { ContactModal } from "@/features/contact/components/contact-modal";
 import { FluidSimulation } from "@/features/home/components/fluid-simulation";
 import { AiChatOverlay } from "@/features/ai-chat/components/ai-chat-overlay";
+import { Hero } from "@/components/hero/hero";
+import { Avatar } from "@/components/hero/avatar";
+import { ChatInput } from "@/components/chat/chat-input";
+import { NavigationCards } from "@/components/navigation/navigation-cards";
+import { ThemeToggle } from "@/features/home/components/theme-toggle";
 import Link from "next/link";
 
 const FEATURED_PROJECTS = [
@@ -16,6 +21,13 @@ const FEATURED_PROJECTS = [
 
 export default function Home() {
   const [isChatOpen, setIsChatOpen] = useState(false);
+
+  const handleCardClick = useCallback((id: string) => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    }
+  }, []);
 
   useEffect(() => {
     const hash = window.location.hash.slice(1);
@@ -34,10 +46,11 @@ export default function Home() {
   return (
     <>
     <main className="relative overflow-hidden text-foreground">
-      <SiteHeader />
-
-      <section id="hero" className="hero-section relative min-h-[100dvh] overflow-hidden">
+      <section id="hero" className="hero-section relative h-[100dvh] overflow-hidden">
         <FluidSimulation />
+        <div className="fixed right-6 top-8 z-50">
+          <ThemeToggle />
+        </div>
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 z-[1] opacity-[0.07]"
@@ -47,57 +60,11 @@ export default function Home() {
             backgroundSize: "32px 32px",
           }}
         />
-        <div className="relative z-[2] mx-auto flex min-h-[100dvh] max-w-7xl flex-col items-center justify-center px-4 pb-16 pt-28 text-center sm:px-6 sm:pt-32 md:px-8 lg:px-12">
-          <div className="stagger">
-            <p className="mb-4 text-xs font-bold uppercase tracking-[0.18em] text-accent sm:text-sm">AI/ML Engineer</p>
-            <h1 className="max-w-4xl text-4xl font-bold leading-[0.95] tracking-[-0.06em] sm:text-5xl md:text-6xl lg:text-7xl">
-              Inam ul Haq Tariq
-            </h1>
-            <p className="mx-auto mt-6 max-w-2xl text-sm leading-relaxed text-foreground/70 sm:text-base md:text-lg">
-              AI/ML engineer specializing in intelligent automation. I build systems that streamline workflows and boost productivity.
-            </p>
-            <div className="mt-8 flex flex-wrap justify-center gap-3">
-              <button
-                type="button"
-                onClick={() => setIsChatOpen(true)}
-                className="group flex items-center gap-2 rounded-full metallic px-5 py-2.5 text-xs font-bold text-ink transition-all duration-300 hover:shadow-lg hover:shadow-accent/30 sm:px-6 sm:py-3 sm:text-sm"
-              >
-                <svg viewBox="0 0 32 32" className="h-5 w-5 sm:h-6 sm:w-6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M16 2C16 2 18 8 22 12C26 16 32 16 32 16C32 16 26 16 22 20C18 24 16 30 16 30C16 30 14 24 10 20C6 16 0 16 0 16C0 16 6 16 10 12C14 8 16 2 16 2Z" fill="url(#gemini-gradient-hero)" />
-                  <path d="M26 22C26 22 27 24.5 28.5 26C30 27.5 32 28 32 28C32 28 30 28 28.5 29.5C27 31 26 32 26 32C26 32 25 31 23.5 29.5C22 28 20 28 20 28C20 28 22 28 23.5 26.5C25 25 26 22 26 22Z" fill="url(#gemini-gradient-small-hero)" />
-                  <defs>
-                    <linearGradient id="gemini-gradient-hero" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
-                      <stop stopColor="#4285F4">
-                        <animate attributeName="stop-color" values="#4285F4;#9B72CB;#D81B60;#4285F4" dur="3s" repeatCount="indefinite" />
-                      </stop>
-                      <stop offset="0.5" stopColor="#9B72CB">
-                        <animate attributeName="stop-color" values="#9B72CB;#D81B60;#4285F4;#9B72CB" dur="3s" repeatCount="indefinite" />
-                      </stop>
-                      <stop offset="1" stopColor="#D81B60">
-                        <animate attributeName="stop-color" values="#D81B60;#4285F4;#9B72CB;#D81B60" dur="3s" repeatCount="indefinite" />
-                      </stop>
-                    </linearGradient>
-                    <linearGradient id="gemini-gradient-small-hero" x1="20" y1="22" x2="32" y2="32" gradientUnits="userSpaceOnUse">
-                      <stop stopColor="#9B72CB">
-                        <animate attributeName="stop-color" values="#9B72CB;#D81B60;#4285F4;#9B72CB" dur="3s" repeatCount="indefinite" />
-                      </stop>
-                      <stop offset="1" stopColor="#D81B60">
-                        <animate attributeName="stop-color" values="#D81B60;#4285F4;#9B72CB;#D81B60" dur="3s" repeatCount="indefinite" />
-                      </stop>
-                    </linearGradient>
-                  </defs>
-                </svg>
-                Ask AI
-              </button>
-              <button
-                type="button"
-                onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}
-                className="rounded-full glass border border-line px-5 py-2.5 text-xs font-bold transition-all duration-300 hover:border-accent hover:text-accent hover:shadow-lg hover:shadow-accent/10 sm:px-6 sm:py-3 sm:text-sm"
-              >
-                View Projects
-              </button>
-            </div>
-          </div>
+        <div className="relative z-[2] mx-auto flex h-full max-w-7xl flex-col items-center justify-center overflow-hidden px-4 pb-8 pt-16 text-center sm:px-6 md:px-8 lg:px-12">
+          <Hero />
+          <Avatar />
+          <ChatInput />
+          <NavigationCards onCardClick={handleCardClick} />
         </div>
       </section>
 

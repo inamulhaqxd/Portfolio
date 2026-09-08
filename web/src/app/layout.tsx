@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Space_Grotesk } from "next/font/google";
 import "./globals.css";
 
@@ -11,11 +11,22 @@ const SITE_URL = "https://inamtariq.vercel.app";
 
 export const metadata: Metadata = {
   title: {
-    default: "Inam ul Haq Tariq - AI/ML Engineer",
+    default: "Inam ul Haq Tariq - AI Engineer",
     template: "%s | Inam ul Haq Tariq",
   },
-  description: "AI/ML engineer specializing in intelligent automation, computer vision, NLP, and LLM/RAG integration. Building systems that streamline workflows and boost productivity.",
-  keywords: ["AI", "ML", "machine learning", "artificial intelligence", "automation", "computer vision", "NLP", "LLM", "RAG", "Python", "FastAPI", "Deep Learning"],
+  description:
+    "Interactive portfolio with an AI-powered interface that answers questions about me, my skills, and my experience",
+  keywords: [
+    "AI Engineer",
+    "Portfolio",
+    "Machine Learning",
+    "NLP",
+    "Computer Vision",
+    "LLMs",
+    "RAG",
+    "Python",
+    "Next.js",
+  ],
   authors: [{ name: "Inam ul Haq Tariq" }],
   creator: "Inam ul Haq Tariq",
   openGraph: {
@@ -23,25 +34,23 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: SITE_URL,
     siteName: "Inam ul Haq Tariq",
-    title: "Inam ul Haq Tariq - AI/ML Engineer",
-    description: "AI/ML engineer specializing in intelligent automation. I build systems that streamline workflows and boost productivity.",
+    title: "Inam ul Haq Tariq - AI Engineer",
+    description:
+      "Interactive portfolio with an AI-powered interface that answers questions about me",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Inam ul Haq Tariq - AI/ML Engineer",
-    description: "AI/ML engineer specializing in intelligent automation. I build systems that streamline workflows and boost productivity.",
+    title: "Inam ul Haq Tariq - AI Engineer",
+    description:
+      "Interactive portfolio with an AI-powered interface that answers questions about me",
   },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
-  },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
 };
 
 export default function RootLayout({
@@ -50,8 +59,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${spaceGrotesk.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col">
+    <html lang="en" className={`${spaceGrotesk.variable} light h-full antialiased`}>
+      <body className="min-h-full">
         {children}
       </body>
     </html>

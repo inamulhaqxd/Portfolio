@@ -63,12 +63,13 @@ export function FluidSimulation() {
   }, []);
 
   return (
-    <canvas
-      ref={canvasRef}
-      id="fluid"
-      className="absolute inset-0 h-full w-full"
-      style={{ zIndex: 0 }}
-      aria-hidden="true"
-    />
+    <div className="fixed top-0 left-0 z-0">
+      <canvas
+        ref={canvasRef}
+        id="fluid"
+        className="h-screen w-screen"
+        aria-hidden="true"
+      />
+    </div>
   );
 }
