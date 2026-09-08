@@ -29,6 +29,9 @@ export function ChatInput({ onSubmit }: ChatInputProps) {
 
     setMessages((prev) => [...prev, { role: "user", content: userMessage }]);
 
+    // Add empty assistant message that we'll stream into
+    setMessages((prev) => [...prev, { role: "assistant", content: "" }]);
+
     try {
       const res = await fetch("/api/ai-chat", {
         method: "POST",
@@ -36,15 +39,57 @@ export function ChatInput({ onSubmit }: ChatInputProps) {
         body: JSON.stringify({ message: userMessage }),
       });
 
-      const data = await res.json();
+      if (!res.ok) {
+        const errorData = await res.json();
+        setMessages((prev) => {
+          const updated = [...prev];
+          updated[updated.length - 1] = {
+            role: "assistant",
+            content: errorData.error || "Something went wrong.",
+          };
+          return updated;
+        });
+        return;
+      }
 
-      if (data.success) {
-        setMessages((prev) => [...prev, { role: "assistant", content: data.response }]);
-      } else {
-        setMessages((prev) => [...prev, { role: "assistant", content: data.error || "Something went wrong. Please try again." }]);
+      const reader = res.body?.getReader();
+      const decoder = new TextDecoder();
+
+      if (!reader) {
+        setMessages((prev) => {
+          const updated = [...prev];
+          updated[updated.length - 1] = {
+            role: "assistant",
+            content: "Failed to connect.",
+          };
+          return updated;
+        });
+        return;
+      }
+
+      while (true) {
+        const { done, value: chunk } = await reader.read();
+        if (done) break;
+
+        const text = decoder.decode(chunk);
+        setMessages((prev) => {
+          const updated = [...prev];
+          updated[updated.length - 1] = {
+            role: "assistant",
+            content: updated[updated.length - 1].content + text,
+          };
+          return updated;
+        });
       }
     } catch {
-      setMessages((prev) => [...prev, { role: "assistant", content: "Failed to connect. Please try again." }]);
+      setMessages((prev) => {
+        const updated = [...prev];
+        updated[updated.length - 1] = {
+          role: "assistant",
+          content: "Failed to connect. Please try again.",
+        };
+        return updated;
+      });
     } finally {
       setIsAnimating(false);
     }
