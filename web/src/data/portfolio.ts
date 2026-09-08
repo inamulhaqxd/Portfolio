@@ -2,7 +2,7 @@ export const portfolio = {
   name: "Inam",
   fullName: "Inam ul Haq Tariq",
   greeting: "Hey, I'm Inam 👋",
-  role: "AI Engineer",
+  role: "AI/ML Engineer",
   intro: "AI/ML engineer specializing in intelligent automation. I build systems that streamline workflows and boost productivity.",
   about: "I'm passionate about building intelligent systems that solve real problems. With expertise in machine learning, NLP, and computer vision, I create AI-powered tools that make a difference.",
   

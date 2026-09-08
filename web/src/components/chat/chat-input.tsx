@@ -9,23 +9,6 @@ interface ChatMessage {
   content: string;
 }
 
-const MOCK_RESPONSES: Record<string, string> = {
-  default: "Thanks for your interest! I'm an AI/ML engineer passionate about building intelligent systems. Feel free to ask me about my projects, skills, or experience!",
-  projects: "I've worked on several exciting projects including intelligent document processing, AI knowledge assistants, and workflow analytics dashboards. Scroll down to check them out!",
-  skills: "My core skills include Python, FastAPI, LangChain, PyTorch, and building RAG pipelines. I also work with Docker, PostgreSQL, and cloud deployment.",
-  experience: "I specialize in AI/ML engineering with focus on NLP, computer vision, and intelligent automation. I love turning complex problems into clean, useful solutions.",
-  contact: "You can reach me via email at inamulhaqxd@gmail.com or connect on LinkedIn. I'm always open to interesting conversations and collaborations!",
-};
-
-function getResponse(input: string): string {
-  const lower = input.toLowerCase();
-  if (lower.includes("project")) return MOCK_RESPONSES.projects;
-  if (lower.includes("skill") || lower.includes("tech")) return MOCK_RESPONSES.skills;
-  if (lower.includes("experience") || lower.includes("background")) return MOCK_RESPONSES.experience;
-  if (lower.includes("contact") || lower.includes("email") || lower.includes("reach")) return MOCK_RESPONSES.contact;
-  return MOCK_RESPONSES.default;
-}
-
 interface ChatInputProps {
   onSubmit?: (message: string) => void;
 }
@@ -35,7 +18,7 @@ export function ChatInput({ onSubmit }: ChatInputProps) {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [isAnimating, setIsAnimating] = useState(false);
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (!value.trim() || isAnimating) return;
 
@@ -46,11 +29,25 @@ export function ChatInput({ onSubmit }: ChatInputProps) {
 
     setMessages((prev) => [...prev, { role: "user", content: userMessage }]);
 
-    setTimeout(() => {
-      const response = getResponse(userMessage);
-      setMessages((prev) => [...prev, { role: "assistant", content: response }]);
+    try {
+      const res = await fetch("/api/ai-chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: userMessage }),
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        setMessages((prev) => [...prev, { role: "assistant", content: data.response }]);
+      } else {
+        setMessages((prev) => [...prev, { role: "assistant", content: data.error || "Something went wrong. Please try again." }]);
+      }
+    } catch {
+      setMessages((prev) => [...prev, { role: "assistant", content: "Failed to connect. Please try again." }]);
+    } finally {
       setIsAnimating(false);
-    }, 800);
+    }
   };
 
   const handleBack = () => {
